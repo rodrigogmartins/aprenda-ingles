@@ -1,0 +1,12 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: rgb(125, 164, 243);
+}
+
+#titulo {
+	margin-top: .8em;
+	font-size: 2em;
+}

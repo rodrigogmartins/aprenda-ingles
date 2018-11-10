@@ -35,41 +35,48 @@
         <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"> Entrar </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="#" id="login"> 
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> Email </span>
-                            </div>
-                            <input type="email" id="email-login" aria-label="Email" class="form-control" required pattern="^[\w_.-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$">
-                        </div>
-
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> Senha </span>
-                            </div>
-                            <input type="password" id="senha-login" aria-label="Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
-                        </div>
-                    </form>
-                    <hr>
-                    <h5> Ainda não possui cadastro?</h5>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
-                        Cadastrar
-                    </button>
-
-                </div>
-                <div class="modal-footer">
-                    <div>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
-                        <button type="button" class="btn btn-primary" id="entrar"> Entrar </button>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"> Entrar </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible fade show" id="login-alert" role="alert">
+                            <strong> ERRO AO EFETUAR LOGIN! </strong>
+                            <br>
+                            <span> Por favor, verifique os dados e tente novamente. </span>
+                            <button type="button" class="close fechar" aria-label="Close">
+                                <span aria-hidden="true"> &times; </span>
+                            </button>
+                        </div>
+                        <form action="#" id="login"> 
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> Email </span>
+                                </div>
+                                <input type="email" id="email-login" aria-label="Email" class="form-control" required>
+                            </div>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> Senha </span>
+                                </div>
+                                <input type="password" id="senha-login" aria-label="Senha" class="form-control" required>
+                            </div>
+                        </form>
+                        <hr>
+                        <h5> Ainda não possui cadastro?</h5>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
+                            Cadastrar
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
+                            <button type="button" class="btn btn-primary" id="entrar"> Entrar </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,6 +91,15 @@
                       </button>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible fade show" id="cadastro-alert" role="alert">
+                            <strong> ERRO AO REALIZAR CADASTRO! </strong>
+                            <br>
+                            <span> Por favor, verifique se todos os compos foram preenchidos corretamente e tente novamente. </span>
+                            <button type="button" class="close fechar" aria-label="Close">
+                                <span aria-hidden="true"> &times; </span>
+                            </button>
+                        </div>
+                        <hr>
                         <form action="#" id="login">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -103,14 +119,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"> Senha </span>
                                 </div>
-                                <input type="password" id="senha" aria-label="Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
+                                <input type="password" id="senha" aria-label="Senha" class="form-control" required pattern="(\w|[!@#-_$%^&*()+=\|/]){6,20}">
                             </div>
 
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"> Confirmar Senha </span>
                                 </div>
-                                <input type="password" id="confirmar-senha" aria-label="Confirmar Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
+                                <input type="password" id="confirmar-senha" aria-label="Confirmar Senha" class="form-control" required pattern="(\w|[!@#-_$%^\&*()+=\|/]){6,20}">
                             </div>
                         </form>
                     </div>

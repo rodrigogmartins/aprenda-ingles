@@ -17,7 +17,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 export const login = function(email, senha) {
   firebase.auth().signInWithEmailAndPassword(email, senha)
     .catch(function(error) { 
-      console.log(error);
+      const ALERT = document.querySelector('#login-alert');
+      ALERT.style.display = 'block';
     });
 };
 
@@ -35,7 +36,8 @@ export const logout = function() {
 export const cadastro = function(email, senha) { 
   firebase.auth().createUserWithEmailAndPassword(email, senha)
     .catch(function(error) {
-      console.log(error);
+      const ALERT = document.querySelector('#cadastro-alert');
+      ALERT.style.display = 'block';
   });
 };
 

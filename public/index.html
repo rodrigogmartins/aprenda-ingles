@@ -47,14 +47,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> Email </span>
                             </div>
-                            <input type="email" aria-label="Email" class="form-control" required pattern="^[\w_.-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$">
+                            <input type="email" id="email-login" aria-label="Email" class="form-control" required pattern="^[\w_.-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$">
                         </div>
 
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> Senha </span>
                             </div>
-                            <input type="password" aria-label="Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
+                            <input type="password" id="senha-login" aria-label="Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
                         </div>
                     </form>
                     <hr>
@@ -67,7 +67,7 @@
                 <div class="modal-footer">
                     <div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
-                        <button type="button" class="btn btn-primary"> Entrar </button>
+                        <button type="button" class="btn btn-primary" id="entrar"> Entrar </button>
                     </div>
                 </div>
                 </div>
@@ -96,27 +96,27 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"> Email </span>
                                 </div>
-                                <input type="email" aria-label="Email" class="form-control" required pattern="^[\w_.-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$">
+                                <input type="email" id="email" aria-label="Email" class="form-control" required pattern="^[\w_.-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$">
                             </div>
 
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"> Senha </span>
                                 </div>
-                                <input type="password" aria-label="Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
+                                <input type="password" id="senha" aria-label="Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
                             </div>
 
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"> Confirmar Senha </span>
                                 </div>
-                                <input type="password" aria-label="Confirmar Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
+                                <input type="password" id="confirmar-senha" aria-label="Confirmar Senha" class="form-control" required pattern="^((\d)*([a-z])*([A-Z])*([!@#$%*-=+_?])*){6,20}$">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
-                      <button type="button" class="btn btn-primary"> Cadastrar </button>
+                      <button type="button" class="btn btn-primary" id="cadastrar"> Cadastrar </button>
                     </div>
                   </div>
                 </div>
@@ -135,11 +135,11 @@
         </p> 
     -->
 
-        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="js/fundo.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

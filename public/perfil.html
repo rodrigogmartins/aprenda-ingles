@@ -48,9 +48,9 @@
                                 <span> GERENCIAR CONTA </span>
                             </button>
                             <div class="dropdown-menu text-center tamanho-menu block">
-                                <button class="btn btn-lg btn-block btn-primary"> ALTERAR DADOS </button>
+                                <button class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#modalAlterarDados"> ALTERAR DADOS </button>
                                 <hr>
-                                <button class="btn btn-lg btn-block btn-danger"> DELETAR CONTA </button>
+                                <button class="btn btn-lg btn-block btn-danger" id="delete-accont"> DELETAR CONTA </button>
                             </div>
                         </div>
                     </div>
@@ -58,25 +58,75 @@
             </div>
         </div>
 
+        <div class="modal fade" id="modalAlterarDados" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"> Cadastrar </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success alert-dismissible fade show" id="update-success-alert" role="alert">
+                        <strong> SUCESSO AO ALTERAR A SENHA! </strong>
+                        <button type="button" class="close fechar" aria-label="Close">
+                            <span aria-hidden="true"> &times; </span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" id="update-unsuccess-alert" role="alert">
+                        <strong> ERRO AO ATUALIZAR CADASTRO! </strong>
+                        <br>
+                        <span> Por favor, verifique se todos os compos foram preenchidos corretamente e tente novamente. </span>
+                        <button type="button" class="close fechar" aria-label="Close">
+                            <span aria-hidden="true"> &times; </span>
+                        </button>
+                    </div>
+                    <hr>
+                    <form action="#" id="login">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> Nova Senha </span>
+                            </div>
+                            <input type="password" id="senha" aria-label="Senha" class="form-control" required pattern="(\w|[!@#-_$%^*()+=\|/]){6,20}">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> Confirmar Senha </span>
+                            </div>
+                            <input type="password" id="confirmar-senha" aria-label="Confirmar Senha" class="form-control" required pattern="(\w|[!@#-_$%^\*()+=\|/]){6,20}">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
+                  <button type="button" class="btn btn-primary" id="alterar"> Alterar </button>
+                </div>
+              </div>
+            </div>
+        </div>
 
         <div id="bg">
             <canvas></canvas>
             <canvas></canvas>
             <canvas></canvas>
         </div>
+            
+        <!--<p>See the Pen 
+                <a href="https://codepen.io/j1f/pen/ogGpZb/"> 
+                    Canva moving background effect 
+                </a> by Justin.
+            </p> 
+        -->
         
-    <!--<p>See the Pen 
-            <a href="https://codepen.io/j1f/pen/ogGpZb/"> 
-                Canva moving background effect 
-            </a> by Justin.
-        </p> 
-    -->
-    
-    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
-    <script src="../node_modules/popper.js/dist/popper.min.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="js/fundo.js"></script>
-    <script src="js/logout.js"></script>
-</body>
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
+        <script src="../node_modules/popper.js/dist/popper.min.js"></script>
+        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="js/fundo.js"></script>
+        <script src="js/logout.js"></script>
+        <script src="js/delete-acc.js"></script>
+        <script src="js/atualizar-acc.js"></script>
+    </body>
 </html>

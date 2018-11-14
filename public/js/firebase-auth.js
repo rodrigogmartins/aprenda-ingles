@@ -1,11 +1,13 @@
 import {config} from './config.firebase.js';
 
-firebase.initializeApp(config);
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
 //escutando status do firebase
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    if (window.location.href.split('/')[3] === 'index.html')
+    if (window.location.href.split('/')[3] === 'index.html' || window.location.href.split('/')[3] === '')
       window.location.replace('atividade.html');
   } else {
     if (window.location.href.split('/')[3] !== 'index.html')
@@ -41,30 +43,27 @@ export const cadastro = function(email, senha) {
   });
 };
 
-//Ação de alterar senha do botão #update
-// document.getElementById("update").onclick = function() { 
-
-// firebase.auth().currentUser.updatePassword('123mudar')
-// .then(function() {
-//     console.log('Senha Alterada!');
-// })
-// .catch(function(error) {
-//     console.log(error);
-// }); 
-
-
-// };
-
 //Ação de excluir do botão #delete
-// document.getElementById("delete").onclick = function() { 
+export const deletar = function() { 
+  var user = firebase.auth().currentUser;
+  user.delete().then(function() {
+    window.location.replace('index.html');
+  }).catch(function(error) {
+    console.log(error);
+  });  
+};
+
+//Ação de alterar senha do botão #update
+export const alterarSenha = function(senha) { 
+  firebase.auth().currentUser.updatePassword(senha)
+  .then(function() {
+    const ALERT = document.querySelector('#update-success-alert');
+    ALERT.style.display = 'block';
+  })
+  .catch(function(error) {
+    const ALERT = document.querySelector('#update-unsuccess-alert');
+    ALERT.style.display = 'block';
+  }); 
+};
 
 
-// var user = firebase.auth().currentUser;
-// user.delete().then(function() {
-//   // User deleted.
-// }).catch(function(error) {
-//   console.log( error );
-// });
-
-  
-// };

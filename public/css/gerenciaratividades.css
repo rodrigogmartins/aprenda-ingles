@@ -1,14 +1,5 @@
-#videos {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-video {
+iframe {
     margin-top: 1em;
     margin-bottom: 1em;
-}
-
-body {
-    margin-top: 7em;
+    border: none;
 }

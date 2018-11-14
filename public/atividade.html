@@ -19,11 +19,16 @@
                         <i class="fas fa-bars"></i>
                     </button>
                     <div class="dropdown-menu text-center tamanho-menu">
-                        <a class="dropdown-item menu-label" href="./perfil.html"> PERFIL </a>
-                        <hr>
-                        <a class="dropdown-item menu-label" href="./gerenciaratividade.html"> GERENCIAR ATIVIDADES </a>
-                        <hr>
-                        <button class="btn btn-lg btn-block btn-danger" id="sair"> SAIR </button>
+                        <a class="btn btn-md btn-block btn-primary" href="./adicionaratividade.html"> ADICIONAR ATIVIDADES </a>
+                        <div id="usuario-logado">
+                            <hr>
+                            <button class="btn btn-md btn-block btn-primary" data-toggle="modal" data-target="#modalAlterarDados">              ALTERAR SENHA 
+                            </button>
+                            <hr>
+                            <button class="btn btn-md btn-block btn-danger" id="sair"> SAIR </button>
+                            <hr>
+                            <button class="btn btn-md btn-block btn-danger" id="delete-accont"> DELETAR CONTA </button>
+                        </div>
                     </div>
                 </div>
 
@@ -43,10 +48,9 @@
                     </div>
                 </div>
 
-                <video class="col-12 col-lg-8 col-xl-8 offset-lg-2 offset-xl-2" controls>
-                    <source src="#" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <iframe class="col-12 col-lg-8 col-xl-8 offset-lg-2 offset-xl-2"
+                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                </iframe> 
 
                 <div id="botoes">
                     <div id="botoes-cima" class="col-12 col-lg-6 col-xl-6" >
@@ -72,6 +76,57 @@
             </div>
         </div>
 
+        <div class="modal fade" id="modalAlterarDados" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"> Cadastrar </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success alert-dismissible fade show" id="update-success-alert" role="alert">
+                        <strong> SUCESSO AO ALTERAR A SENHA! </strong>
+                        <button type="button" class="close fechar" aria-label="Close">
+                            <span aria-hidden="true"> &times; </span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" id="update-unsuccess-alert" role="alert">
+                        <strong> ERRO AO ATUALIZAR CADASTRO! </strong>
+                        <br>
+                        <span> 
+                            A senha deve ter entre 6 e 20 caracteres A-Z ou a-z e !@#-_$%^*()+=\|/.
+                        </span>
+                        <button type="button" class="close fechar" aria-label="Close">
+                            <span aria-hidden="true"> &times; </span>
+                        </button>
+                    </div>
+                    <hr>
+                    <form action="#" id="login">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> Nova Senha </span>
+                            </div>
+                            <input type="password" id="senha" aria-label="Senha" class="form-control" required pattern="(\w|[!@#-_$%^*()+=\|/]){6,20}">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> Confirmar Senha </span>
+                            </div>
+                            <input type="password" id="confirmar-senha" aria-label="Confirmar Senha" class="form-control" required pattern="(\w|[!@#-_$%^\*()+=\|/]){6,20}">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
+                  <button type="button" class="btn btn-primary" id="alterar"> Alterar </button>
+                </div>
+              </div>
+            </div>
+        </div>
+
         <div id="bg">
             <canvas></canvas>
             <canvas></canvas>
@@ -93,5 +148,7 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/fundo.js"></script>
     <script src="js/logout.js"></script>
+    <script src="js/atualizar-acc.js"></script>
+    <script src="js/delete-acc.js"></script>
 </body>
 </html>

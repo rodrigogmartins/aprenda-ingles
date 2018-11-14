@@ -57,7 +57,8 @@ ul {
     padding: 0px;
 }
 
-video {
+iframe {
     height: 50vh;
     margin-bottom: 1em;
+    border: none;
 }

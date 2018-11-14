@@ -7,10 +7,7 @@ BTN_ALTERAR.addEventListener('click', function() {
     const SENHA = document.querySelector('#senha').value;
     const CONF_SENHA = document.querySelector('#confirmar-senha').value;
 
-    if (SENHA === CONF_SENHA) {
-        alterarSenha(SENHA);
-    }
-
+    alterarSenha(SENHA, CONF_SENHA);
 });
 
 const CLOSE = document.querySelectorAll('.fechar');

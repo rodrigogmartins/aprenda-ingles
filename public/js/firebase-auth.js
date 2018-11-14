@@ -6,12 +6,15 @@ if (!firebase.apps.length) {
 
 //escutando status do firebase
 firebase.auth().onAuthStateChanged(function(user) {
+  const DIV_LOGADO = document.querySelector('#usuario-logado');
+
   if (user) {
+    DIV_LOGADO.style.display = 'block';
+    
     if (window.location.href.split('/')[3] === 'index.html' || window.location.href.split('/')[3] === '')
       window.location.replace('atividade.html');
   } else {
-    if (window.location.href.split('/')[3] !== 'index.html')
-      window.location.replace('index.html');
+    DIV_LOGADO.style.display = 'none';
   }
 });
 
@@ -54,16 +57,21 @@ export const deletar = function() {
 };
 
 //Ação de alterar senha do botão #update
-export const alterarSenha = function(senha) { 
-  firebase.auth().currentUser.updatePassword(senha)
-  .then(function() {
-    const ALERT = document.querySelector('#update-success-alert');
-    ALERT.style.display = 'block';
-  })
-  .catch(function(error) {
+export const alterarSenha = function(senha, confirmSenha) { 
+  if (senha === confirmSenha) {
+    firebase.auth().currentUser.updatePassword(senha)
+    .then(function() {
+      const ALERT = document.querySelector('#update-success-alert');
+      ALERT.style.display = 'block';
+    })
+    .catch(function(error) {
+        const ALERT = document.querySelector('#update-unsuccess-alert');
+        ALERT.style.display = 'block';
+    }); 
+  } else {
     const ALERT = document.querySelector('#update-unsuccess-alert');
     ALERT.style.display = 'block';
-  }); 
+  }
 };
 
 

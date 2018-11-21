@@ -1,51 +1,60 @@
-import {Atividade} from './atividade.class.js';
-import {adicionarAtividade, buscarAtividades} from './firebase-db.js';
-import {DATABASE} from './firebase.js';
+import {Atividade} from './class/atividade.class.js';
+import {adicionarAtividade} from './modules/firebase-db';
+import {logout} from './modules/firebase-auth.js';
 
-const BTN_ADD_ATIVIDADE = document.querySelector('#adicionar-atividade');
-const BTN_ADD_OPTION = document.querySelector('#adicionar-opcao');
-const BTN_CONCLUIR = document.querySelector('#concluir');
-const URL = document.querySelector('#url');
-const TEMPO_INICIO = document.querySelector('#tempo-inicio');
-const TEMPO_PAUSE = document.querySelector('#tempo-pause');
-const PERGUNTA = document.querySelector('#pergunta');
-const RESPOSTA = document.querySelector('#resposta');
-const ALTERNATIVA = document.querySelector('#alternativa');
+const FORM = document.querySelector('#add-atividade');
+const BTN_SAIR = document.querySelector('#sair');
+
+BTN_SAIR.addEventListener('click', logout);
 
 let atividade = null;
+let numeroDeAlternativasAdicionadas = 0;
 
-BTN_ADD_ATIVIDADE.addEventListener('click', function() {
-    atividade = new Atividade(URL.value, TEMPO_INICIO.value, TEMPO_PAUSE.value, PERGUNTA.value, RESPOSTA.value);
+FORM.adicionaratividade.addEventListener('click', function(e) {
+    atividade = new Atividade(FORM.url.value, FORM.tempoinicio.value, FORM.tempopause.value, FORM.pergunta.value, FORM.resposta.value);
+    FORM.adicionaratividade.setAttribute('disabled', true);
+    e.preventDefault();
 });
 
-BTN_ADD_OPTION.addEventListener('click', function() {
-    atividade.addOption = ALTERNATIVA.value;
-    ALTERNATIVA.value = '';
+FORM.adicionaropcao.addEventListener('click', function(e) {
+    numeroDeAlternativasAdicionadas++;
+    if (numeroDeAlternativasAdicionadas === 3)
+        FORM.adicionaropcao.setAttribute('disabled', true);
+    atividade.addOption = FORM.alternativa.value;
+    FORM.alternativa.removeAttribute('placeholder');
+    FORM.alternativa.setAttribute('placeholder', `Alternativa ${numeroDeAlternativasAdicionadas} de 3`);
+    adicionarElementosTabela(FORM.alternativa.value, numeroDeAlternativasAdicionadas);
+    FORM.alternativa.value = '';
+    FORM.alternativa.focus();
+    e.preventDefault();
 });
 
-BTN_CONCLUIR.addEventListener('click', function() {
-    URL.value = '';
-    TEMPO_INICIO.value = '';
-    TEMPO_PAUSE.value = '';
-    PERGUNTA.value = '';
-    RESPOSTA.value = '';
+const adicionarElementosTabela = function(numeroRow, valor) {
+    const TBODY = document.querySelector('#tbody');
+    const TH = document.createElement('th');
+    TH.setAttribute('scope', 'row');
+    TH.textContent = numeroRow;
+    const TD = document.createElement('td');
+    TD.textContent = valor;
+    const TR = document.createElement('tr');
+    TR.appendChild(TD);
+    TR.appendChild(TH);
+    TBODY.appendChild(TR);
+}
+
+FORM.concluir.addEventListener('click', function(e) {
+    const TBODY = document.querySelector('#tbody');
+    numeroDeAlternativasAdicionadas = 0;
+    TBODY.innerHTML = '';
+    FORM.url.value = '';
+    FORM.tempoinicio.value = '';
+    FORM.tempopause.value = '';
+    FORM.pergunta.value = '';
+    FORM.resposta.value = '';
+    FORM.alternativa.removeAttribute('placeholder');
+    FORM.adicionaropcao.removeAttribute('disabled');
+    FORM.adicionaratividade.removeAttribute('disabled');
+    FORM.alternativa.setAttribute('placeholder', `Alternativa 0 de 3`);
     adicionarAtividade(atividade);
-    buscarAtividades();
+    e.preventDefault()
 });
-
-
-const teste = DATABASE.ref('/atividades/');
-
-teste.on('value', function(snapshot) {
-    console.log(snapshot.val());
-});
-
-// carregar atividades
-
-// document.addEventListener('DOMContentLoaded', function(e) {
-
-//     TESTE.on('child_added', function(atv) {
-//         console.log(atv.val());
-//     });
-
-// });

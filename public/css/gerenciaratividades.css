@@ -3,3 +3,48 @@ iframe {
     margin-bottom: 1em;
     border: none;
 }
+
+table {
+    max-width: 800px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1000px) {
+    #titulo {
+        margin-top: .5em;
+        margin-bottom: .7em;
+        color: white;
+        font-size: 2em;
+    }
+
+    #informacoes {
+        margin-top: 1em;
+        max-height: 600px;
+        overflow-y: scroll;
+    }
+
+    .alinhar {
+        max-width: 300px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    #titulo {
+        margin-top: .5em;
+        margin-bottom: .7em;
+        color: white;
+        font-size: 2em;
+    }
+
+    #informacoes {
+        margin-top: 1em;
+        max-height: 600px;
+        overflow-y: scroll;
+    }
+
+    .alinhar {
+        max-width: 120px;
+    }
+}
+

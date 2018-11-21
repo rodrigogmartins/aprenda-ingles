@@ -1,11 +1,7 @@
 table {
-    border-radius: 5px;
     margin-top: 1em;
-}
-
-td {
-    max-width: 50px;
-    overflow-x: hidden;
+    border-radius: 5px;
+    text-align: center;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -14,6 +10,12 @@ td {
         margin-bottom: .7em;
         color: white;
         font-size: 2em;
+    }
+
+    #informacoes {
+        margin-top: 1em;
+        max-height: 600px;
+        overflow-y: scroll;
     }
 }
 

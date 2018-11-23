@@ -15,6 +15,10 @@ export class Atividade {
         }
     }
 
+    set alternativas(alternativas) {
+        this._alternativas = alternativas;
+    }
+
     get url() {
         return this._url;
     }

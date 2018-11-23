@@ -1,13 +1,13 @@
 import {buscarTodasAtividades, excluirAtividade}
     from './modules/firebase-db.js';
-import {logout, getIdUsuario} from './modules/firebase-auth.js';
+import {logout} from './modules/firebase-auth.js';
 
 const BTN_SAIR = document.querySelector('#sair');
 const T_BODY = document.querySelector('tbody');
 
 BTN_SAIR.addEventListener('click', logout);
+
 document.addEventListener('DOMContentLoaded', function() {
-    getIdUsuario().then(mostra);
     buscarTodasAtividades().then(montarTabelaDeAtividades);
 });
 
@@ -16,10 +16,6 @@ T_BODY.addEventListener('click', function(e) {
         excluirAtividade(e.target.parentElement.parentElement.dataset['key']);
     }
 });
-
-const mostra = function(OBJECT) {
-    console.log(OBJECT);
-};
 
 const montarTabelaDeAtividades = function(OBJECT) {
     const MAP = new Map(Object.entries(OBJECT));

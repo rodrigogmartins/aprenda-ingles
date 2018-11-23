@@ -1,23 +1,24 @@
 import {DATABASE} from './firebase.js';
+import {feedback} from './alert.js';
 
-export const setProgressoUsuario = function(userId, progresso) {
-    DATABASE.ref('/users/' + userId).set({
-        progresso: progresso
+export const setProgressoUsuario = function(userId, codigoVideo) {
+    DATABASE.ref(`/users/${userId}/progresso`).set({
+        codigovideo: codigoVideo
     });
 };
 
 export const getProgressoUsuario = function(userId) {
     const USER = DATABASE.ref(`/users/${userId}/progresso`);
 
-    USER.once('value', function(snapshot) {
-        const OBJECT = snapshot.val();
-        console.log(OBJECT);
+    return new Promise(function(resolve) {
+        USER.once('value', function(snapshot) {
+            resolve(snapshot.val());
+        });
     });
 };
 
 export const adicionarAtividade = function(atividade) {
-    DATABASE.ref('atividades/'+Date.now()).set({
-        codigo: atividade.codigo,
+    DATABASE.ref(`atividades/${Date.now()}`).set({
         url: atividade.url,
         tempoInicio: atividade.tempoInicio,
         tempoPause: atividade.tempoPause,
@@ -25,11 +26,9 @@ export const adicionarAtividade = function(atividade) {
         resposta: atividade.resposta,
         alternativas: atividade.alternativas
     }).then(function() {
-        const ALERT = document.querySelector('#add-atividade-succsess-alert');
-        ALERT.style.display = 'block';
+        feedback('#add-atividade-succsess-alert');
     }).catch(function() {
-        const ALERT = document.querySelector('#add-atividade-error-alert');
-        ALERT.style.display = 'block';
+        feedback('#add-atividade-error-alert');
     });
 };
 
@@ -42,11 +41,12 @@ export const excluirAtividade = function(key) {
 };
 
 export const buscaAtividade = function(chaveAtividade) {
-    const ATIVIDADE = DATABASE.ref(`/users/${chaveAtividade}/progresso`);
+    const ATIVIDADE = DATABASE.ref(`/atividades/${chaveAtividade}`);
 
-    ATIVIDADE.on('value', function(snapshot) {
-        const OBJECT = snapshot.val();
-        console.log(OBJECT);
+    return new Promise(function(resolve) {
+        ATIVIDADE.once('value', function(snapshot) {
+            resolve(snapshot.val());
+        });
     });
 };
 

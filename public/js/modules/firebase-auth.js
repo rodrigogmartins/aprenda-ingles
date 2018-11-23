@@ -1,5 +1,6 @@
 import {AUTH} from './firebase.js';
-import {setProgressoUsuario} from './firebase-db.js';
+import {setProgressoUsuario, buscarTodasAtividades} from './firebase-db.js';
+import {feedback} from './alert.js';
 
 AUTH.onAuthStateChanged(function(user) {
     const DIV_LOGADO = document.querySelector('#usuario-logado');
@@ -30,8 +31,7 @@ export const getIdUsuario = function() {
 export const login = function(email, senha) {
     AUTH.signInWithEmailAndPassword(email, senha)
         .catch(function(error) {
-            const ALERT = document.querySelector('#login-alert');
-            ALERT.style.display = 'block';
+            feedback('#login-alert');
         });
 };
 
@@ -45,12 +45,16 @@ export const logout = function() {
 export const cadastro = function(email, senha) {
     AUTH.createUserWithEmailAndPassword(email, senha)
         .then(function() {
-            setProgressoUsuario(AUTH.currentUser.uid, 'abc');
+            buscarTodasAtividades().then(setPrimeiraAtividade);
         })
         .catch(function(error) {
-            const ALERT = document.querySelector('#cadastro-alert');
-            ALERT.style.display = 'block';
+            feedback('#cadastro-alert');
         });
+};
+
+const setPrimeiraAtividade = function(OBJECT) {
+    const CHAVES = Object.keys(OBJECT);
+    setProgressoUsuario(AUTH.currentUser.uid, CHAVES[0]);
 };
 
 export const deletar = function() {
@@ -65,15 +69,12 @@ export const alterarSenha = function(senha, confirmSenha) {
     if (senha === confirmSenha) {
         AUTH.currentUser.updatePassword(senha)
             .then(function() {
-                const ALERT = document.querySelector('#update-success-alert');
-                ALERT.style.display = 'block';
+                feedback('#update-success-alert');
             })
             .catch(function(error) {
-                const ALERT = document.querySelector('#update-unsuccess-alert');
-                ALERT.style.display = 'block';
+                feedback('#update-unsuccess-alert');
             });
     } else {
-        const ALERT = document.querySelector('#update-unsuccess-alert');
-        ALERT.style.display = 'block';
+        feedback('#update-unsuccess-alert');
     }
 };

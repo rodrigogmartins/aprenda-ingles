@@ -18,15 +18,15 @@ const salvaProgresso = function(progresso) {
 const mostraAtividade = function(atividade) {
     const ATIVIDADE = new Atividade(atividade.url, atividade.tempoInicio,
         atividade.tempoPause, atividade.pergunta, atividade.resposta);
-    const vetor = atividade.alternativas;
-    vetor.push(atividade.resposta);
-    ATIVIDADE.alternativas = vetor;
+    const atividades = atividade.alternativas;
+    atividades.push(atividade.resposta);
+    ATIVIDADE.alternativas = atividades;
     montaVideoAtividade(ATIVIDADE);
 };
 
 const montaVideoAtividade = function(ATIVIDADE) {
     // const IFRAME = document.querySelector('iframe');
-    // IFRAME.setAttribute('src', `${ATIVIDADE.url}?controls=0`);
+    // IFRAME.setAttribute('src', `${ATIVIDADE.url}?controls=0&loop=1`);
     const OPCOES = ATIVIDADE.alternativas;
     mostrarAlternativas(OPCOES);
 };
@@ -57,4 +57,26 @@ const mostrarAlternativas = function(alternativas) {
 
 const elementoNaoSorteado = function(vetor, elemento) {
     return vetor.indexOf(elemento) === -1;
+};
+
+const BUTTONS = document.querySelectorAll('.opcao');
+for (const BUTTON of BUTTONS) {
+    BUTTON.addEventListener('click', function(event) {
+        verificaAcerto(event);
+    });
+}
+
+const verificaAcerto = function(event) {
+    buscaAtividade(localStorage.getItem('progresso')).then(salvaResposta);
+    const OPCAO = event.target.textContent;
+    const RESPOSTA = localStorage.getItem('resposta');
+    if (OPCAO === RESPOSTA) {
+        console.log('acertou');
+    } else {
+        console.log('errou');
+    }
+};
+
+const salvaResposta = function(objectAtividade) {
+    localStorage.setItem('resposta', objectAtividade.resposta);
 };

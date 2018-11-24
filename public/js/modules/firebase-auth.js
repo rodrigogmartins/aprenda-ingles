@@ -1,5 +1,5 @@
 import {AUTH} from './firebase.js';
-import {setProgressoUsuario, buscarTodasAtividades} from './firebase-db.js';
+import {setProgressoUsuario} from './firebase-db.js';
 import {feedback} from './alert.js';
 
 AUTH.onAuthStateChanged(function(user) {
@@ -7,11 +7,6 @@ AUTH.onAuthStateChanged(function(user) {
     if (user) {
         if (DIV_LOGADO) {
             DIV_LOGADO.style.display = 'block';
-        }
-
-        if (window.location.href.split('/')[3] === 'index.html'
-            || window.location.href.split('/')[3] === '') {
-            window.location.replace('atividade.html');
         }
     } else {
         if (DIV_LOGADO) {
@@ -45,16 +40,15 @@ export const logout = function() {
 export const cadastro = function(email, senha) {
     AUTH.createUserWithEmailAndPassword(email, senha)
         .then(function() {
-            buscarTodasAtividades().then(setPrimeiraAtividade);
+            setProgressoUsuario(AUTH.currentUser.uid, '0').then(redirect);
         })
         .catch(function(error) {
             feedback('#cadastro-alert');
         });
 };
 
-const setPrimeiraAtividade = function(OBJECT) {
-    const CHAVES = Object.keys(OBJECT);
-    setProgressoUsuario(AUTH.currentUser.uid, CHAVES[0]);
+const redirect = function() {
+    window.location.replace('atividade.html');
 };
 
 export const deletar = function() {

@@ -1,65 +1,24 @@
 import {logout, getIdUsuario} from './modules/firebase-auth.js';
-import {buscaAtividade, getProgressoUsuario} from './modules/firebase-db.js';
-import {Atividade} from './class/atividade.class.js';
+import {buscarTodasAtividades, buscaAtividade} from './modules/firebase-db.js';
+import * as atividadeModules from './modules/atividade.js';
+import * as progressoModules from './modules/progresso.js';
 
 const BTN_SAIR = document.querySelector('#sair');
+const BUTTONS = document.querySelectorAll('.opcao');
 
 BTN_SAIR.addEventListener('click', logout);
 
 document.addEventListener('DOMContentLoaded', function() {
-    getIdUsuario().then(getProgressoUsuario).then(salvaProgresso);
-    buscaAtividade(localStorage.getItem('progresso')).then(mostraAtividade);
+    progressoModules.getProgresso();
+    progressoModules.atualizaBarraDeProgresso();
+    setTimeout(function() {
+        buscarTodasAtividades().then(progressoModules.salvaAtividadeAtual);
+    }, 15000);
+    setTimeout(function() {
+        buscarTodasAtividades().then(atividadeModules.mostraAtividade);
+    }, 15000);
 });
 
-const salvaProgresso = function(progresso) {
-    localStorage.setItem('progresso', progresso.codigovideo);
-};
-
-const mostraAtividade = function(atividade) {
-    const ATIVIDADE = new Atividade(atividade.url, atividade.tempoInicio,
-        atividade.tempoPause, atividade.pergunta, atividade.resposta);
-    const atividades = atividade.alternativas;
-    atividades.push(atividade.resposta);
-    ATIVIDADE.alternativas = atividades;
-    montaVideoAtividade(ATIVIDADE);
-};
-
-const montaVideoAtividade = function(ATIVIDADE) {
-    // const IFRAME = document.querySelector('iframe');
-    // IFRAME.setAttribute('src', `${ATIVIDADE.url}?controls=0&loop=1`);
-    const OPCOES = ATIVIDADE.alternativas;
-    mostrarAlternativas(OPCOES);
-};
-
-const mostrarAlternativas = function(alternativas) {
-    const BUTTONS_OPCOES = document.querySelectorAll('.opcao');
-    const botoesSorteados = [];
-    const opcoesSorteadas = [];
-
-    while (botoesSorteados.length < 4 && opcoesSorteadas.length < 4) {
-        let sorteioBotao = Math.round(Math.random() * 3);
-        let sorteioOpcao = Math.round(Math.random() * 3);
-
-        if (elementoNaoSorteado(botoesSorteados, sorteioBotao)) {
-            if (elementoNaoSorteado(opcoesSorteadas, sorteioOpcao)) {
-                BUTTONS_OPCOES[sorteioBotao].textContent =
-                    alternativas[sorteioOpcao];
-                botoesSorteados.push(sorteioBotao);
-                opcoesSorteadas.push(sorteioOpcao);
-            } else {
-                sorteioOpcao = Math.round(Math.random() * 3);
-            }
-        } else {
-            sorteioBotao = Math.round(Math.random() * 3);
-        }
-    }
-};
-
-const elementoNaoSorteado = function(vetor, elemento) {
-    return vetor.indexOf(elemento) === -1;
-};
-
-const BUTTONS = document.querySelectorAll('.opcao');
 for (const BUTTON of BUTTONS) {
     BUTTON.addEventListener('click', function(event) {
         verificaAcerto(event);
@@ -67,16 +26,21 @@ for (const BUTTON of BUTTONS) {
 }
 
 const verificaAcerto = function(event) {
-    buscaAtividade(localStorage.getItem('progresso')).then(salvaResposta);
     const OPCAO = event.target.textContent;
     const RESPOSTA = localStorage.getItem('resposta');
     if (OPCAO === RESPOSTA) {
-        console.log('acertou');
+        getIdUsuario().then(atividadeModules.salvaUserId);
+        buscarTodasAtividades().then(progressoModules.setProximaAtividade);
+        progressoModules.getProgresso();
+        progressoModules.atualizaBarraDeProgresso();
+        setTimeout(function() {
+            buscarTodasAtividades().then(progressoModules.salvaAtividadeAtual);
+        }, 15000);
+        setTimeout(function() {
+            buscarTodasAtividades().then(atividadeModules.mostraAtividade);
+        }, 15000);
     } else {
         console.log('errou');
     }
 };
 
-const salvaResposta = function(objectAtividade) {
-    localStorage.setItem('resposta', objectAtividade.resposta);
-};

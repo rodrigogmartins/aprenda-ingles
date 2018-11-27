@@ -1,22 +1,25 @@
 import {Atividade} from '../class/atividade.class.js';
 
 export const mostraAtividade = function(OBJECT) {
-    console.log('entrou');
     const MAP = new Map(Object.entries(OBJECT));
     const ATIVIDADE_ATUAL = localStorage.getItem('atividadeAtual');
-    console.log(ATIVIDADE_ATUAL);
     const atividade = MAP.get(ATIVIDADE_ATUAL);
     const ATIVIDADE = new Atividade(atividade.url, atividade.tempoInicio,
         atividade.tempoPause, atividade.pergunta, atividade.resposta);
     const alternativas = atividade.alternativas;
     alternativas.push(atividade.resposta);
     ATIVIDADE.alternativas = alternativas;
-    console.log(alternativas);
     salvaResposta(ATIVIDADE);
-    montaVideoAtividade(ATIVIDADE);
+    salvaPergunta(ATIVIDADE);
+    mostraPergunta();
+    montaOpcoesAtividade(ATIVIDADE);
 };
 
-const montaVideoAtividade = function(ATIVIDADE) {
+const salvaPergunta = function(atividade) {
+    localStorage.setItem('pergunta', atividade.pergunta);
+};
+
+const montaOpcoesAtividade = function(ATIVIDADE) {
     // const IFRAME = document.querySelector('iframe');
     // IFRAME.setAttribute('src', `${ATIVIDADE.url}?controls=0&loop=1`);
     const OPCOES = ATIVIDADE.alternativas;
@@ -49,6 +52,12 @@ const mostrarAlternativas = function(alternativas) {
 
 const elementoNaoSorteado = function(vetor, elemento) {
     return vetor.indexOf(elemento) === -1;
+};
+
+const mostraPergunta = function() {
+    const PERGUNTA = localStorage.getItem('pergunta');
+    const CAMPO_PERGUNTA = document.querySelector('#titulo');
+    CAMPO_PERGUNTA.textContent = PERGUNTA;
 };
 
 export const salvaResposta = function(objectAtividade) {

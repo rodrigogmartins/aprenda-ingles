@@ -48,13 +48,11 @@
 
                 <div class="col-12 col-lg-12 col-xl-12">
                     <div class="progress" id="progresso">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"> 75% </div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
-                <iframe class="col-12 col-lg-8 col-xl-8 offset-lg-2 offset-xl-2"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                </iframe>
+                <div id="player" class="col-12 col-lg-8 col-xl-8 offset-lg-2 offset-xl-2"></div>
 
                 <div id="botoes">
                     <div id="botoes-cima" class="col-12 col-lg-6 col-xl-6" >
@@ -92,8 +90,6 @@
             </a> by Justin.
         </p>
     -->
-
-
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
     <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>

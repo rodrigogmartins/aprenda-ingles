@@ -9,6 +9,10 @@ const BUTTONS = document.querySelectorAll('.opcao');
 BTN_SAIR.addEventListener('click', logout);
 
 document.addEventListener('DOMContentLoaded', function() {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/player_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     progressoModules.getProgresso();
     progressoModules.atualizaBarraDeProgresso();
     buscarTodasAtividades().then(function(r) {
@@ -35,8 +39,8 @@ const verificaAcerto = function(event) {
             progressoModules.salvaAtividadeAtual(r);
             return buscarTodasAtividades();
         }).then(atividadeModules.mostraAtividade);
-    } else {
-        console.log('errou');
+        setTimeout(function() {
+            window.location.reload();
+        }, 4000);
     }
 };
-

@@ -10,8 +10,9 @@ let numeroDeAlternativasAdicionadas = 0;
 BTN_SAIR.addEventListener('click', logout);
 
 FORM.adicionaratividade.addEventListener('click', function(e) {
-    atividade = new Atividade(FORM.url.value, FORM.tempoinicio.value,
-        FORM.tempopause.value, FORM.pergunta.value, FORM.resposta.value);
+    atividade = new Atividade(FORM.url.value.split('=')[1],
+        FORM.tempoinicio.value, FORM.tempopause.value,
+        FORM.pergunta.value, FORM.resposta.value);
     FORM.adicionaratividade.setAttribute('disabled', true);
     e.preventDefault();
 });

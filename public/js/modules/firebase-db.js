@@ -20,7 +20,7 @@ export const getProgressoUsuario = function(userId) {
 
 export const adicionarAtividade = function(atividade) {
     DATABASE.ref(`atividades/${Date.now()}`).set({
-        url: atividade.url,
+        codigo: atividade.codigo,
         tempoInicio: atividade.tempoInicio,
         tempoPause: atividade.tempoPause,
         pergunta: atividade.pergunta,

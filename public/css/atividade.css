@@ -23,6 +23,10 @@ body {
 		align-items: center;
 		background-color: rgb(125, 164, 243);
     }
+
+    #display-sencondary {
+        width: 60vw;
+    }
 }
 
 
@@ -62,7 +66,7 @@ ul {
     padding: 0px;
 }
 
-iframe {
+#player {
     height: 50vh;
     margin-bottom: 1em;
     border: none;

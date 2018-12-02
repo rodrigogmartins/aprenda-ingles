@@ -1,7 +1,6 @@
 export class Atividade {
-    constructor(url, tempoInicio, tempoPause, pergunta, resposta) {
-        this._url = url;
-        this._codigo = url.split('=')[1];
+    constructor(codigo, tempoInicio, tempoPause, pergunta, resposta) {
+        this._codigo = codigo;
         this._tempoInicio = tempoInicio;
         this._tempoPause = tempoPause;
         this._pergunta = pergunta;
@@ -17,10 +16,6 @@ export class Atividade {
 
     set alternativas(alternativas) {
         this._alternativas = alternativas;
-    }
-
-    get url() {
-        return this._url;
     }
 
     get codigo() {

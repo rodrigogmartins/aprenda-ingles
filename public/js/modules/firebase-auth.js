@@ -25,6 +25,9 @@ export const getIdUsuario = function() {
 
 export const login = function(email, senha) {
     AUTH.signInWithEmailAndPassword(email, senha)
+        .then(function() {
+            window.location.replace('atividade.html');
+        })
         .catch(function(error) {
             feedback('#login-alert');
         });

@@ -1,9 +1,13 @@
-import {buscarTodasAtividades, excluirAtividade}
+import {buscarTodasAtividades, excluirAtividade, buscaAtividade, editarAtividade}
     from './modules/firebase-db.js';
 import {logout} from './modules/firebase-auth.js';
+import {Atividade} from './class/atividade.class.js';
+import {montarTabelaDeAtividades} from './modules/table.js';
 
 const BTN_SAIR = document.querySelector('#sair');
 const T_BODY = document.querySelector('tbody');
+const FORM = document.querySelector('#alterar');
+const BTN_EDIT = document.querySelector('#editar');
 
 BTN_SAIR.addEventListener('click', logout);
 
@@ -11,39 +15,44 @@ document.addEventListener('DOMContentLoaded', function() {
     buscarTodasAtividades().then(montarTabelaDeAtividades);
 });
 
+BTN_EDIT.addEventListener('click', function() {
+    const ATIVIDADE = new Atividade(FORM.url.value.split('=')[1],
+        FORM.tempoinicio.value, FORM.tempopause.value,
+        FORM.pergunta.value, FORM.resposta.value);
+    const ALTERNATIVAS = [FORM.alternativa0.value,
+        FORM.alternativa1.value, FORM.alternativa2.value];
+    ATIVIDADE.alternativas = ALTERNATIVAS;
+    const id = localStorage.getItem('id');
+    editarAtividade(id, ATIVIDADE);
+});
+
 T_BODY.addEventListener('click', function(e) {
-    if (e.target.tagName === 'BUTTON') {
+    if (e.target.tagName === 'BUTTON' && e.target.id === 'btn-edit') {
+        const codAtiv = e.target.parentElement.parentElement.dataset['key'];
+        localStorage.setItem('id', codAtiv);
+        buscaAtividade(codAtiv)
+            .then(montaAtividade)
+            .then(mostraAtividade);
+    } else if (e.target.tagName === 'BUTTON' && e.target.id === 'btn-delete') {
         excluirAtividade(e.target.parentElement.parentElement.dataset['key']);
     }
 });
 
-const montarTabelaDeAtividades = function(OBJECT) {
-    const MAP = new Map(Object.entries(OBJECT));
-    const CHAVES = Object.keys(OBJECT);
-    const TBODY = document.querySelector('#tbody');
-    for (let i = 0; i < CHAVES.length; i++) {
-        const ATIVIDADE = MAP.get(CHAVES[i]);
-        const TH_COD = criarLinhaTabela(CHAVES[i]);
-        const TH_PERGUNTA = criarLinhaTabela(ATIVIDADE.pergunta);
-        const TH_DELETE = document.createElement('th');
-        const BTN = document.createElement('button');
-        BTN.textContent = 'X';
-        BTN.setAttribute('class', 'btn btn-sm btn-block btn-danger');
-        TH_DELETE.appendChild(BTN);
-        const TR = document.createElement('tr');
-        TR.appendChild(TH_COD);
-        TR.appendChild(TH_PERGUNTA);
-        TR.appendChild(TH_DELETE);
-        TR.dataset['key'] = CHAVES[i];
-        TBODY.appendChild(TR);
-    }
+const montaAtividade = function(ATIVIDADE) {
+    const atividade = new Atividade(ATIVIDADE.codigo, ATIVIDADE.tempoInicio,
+        ATIVIDADE.tempoPause, ATIVIDADE.pergunta, ATIVIDADE.resposta);
+    atividade.alternativas = ATIVIDADE.alternativas;
+    return atividade;
 };
 
-const criarLinhaTabela = function(texto) {
-    const TH = document.createElement('th');
-    const SPAN = document.createElement('span');
-    SPAN.setAttribute('class', 'alinhar d-inline-block text-truncate');
-    SPAN.textContent = texto;
-    TH.appendChild(SPAN);
-    return TH;
+const mostraAtividade = function(atividade) {
+    FORM.url.value = `https://www.youtube.com/watch?v=${atividade.codigo}`,
+    FORM.tempoinicio.value = atividade.tempoInicio;
+    FORM.tempopause.value = atividade.tempoPause;
+    FORM.pergunta.value = atividade.pergunta;
+    FORM.resposta.value = atividade.resposta;
+    const alternativas = atividade.alternativas;
+    for (let i = 0; i < alternativas.length; i++) {
+        document.querySelector(`#alternativa${i}`).value = alternativas[i];
+    }
 };

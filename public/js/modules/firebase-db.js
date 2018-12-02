@@ -60,3 +60,18 @@ export const buscarTodasAtividades = function() {
         });
     });
 };
+
+export const editarAtividade = function(chaveAtividade, atividade) {
+    DATABASE.ref(`/atividades/${chaveAtividade}`).set({
+        codigo: atividade.codigo,
+        tempoInicio: atividade.tempoInicio,
+        tempoPause: atividade.tempoPause,
+        pergunta: atividade.pergunta,
+        resposta: atividade.resposta,
+        alternativas: atividade.alternativas
+    }).then(function() {
+        feedback('#edit-atividade-succsess-alert');
+    }).catch(function() {
+        feedback('#edit-atividade-error-alert');
+    });
+};

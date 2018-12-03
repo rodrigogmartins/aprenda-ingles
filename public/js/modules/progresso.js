@@ -3,7 +3,9 @@ import {getProgressoUsuario, buscarTodasAtividades,
     setProgressoUsuario} from './firebase-db.js';
 
 export const getProgresso = function() {
-    getIdUsuario().then(getProgressoUsuario).then(salvaProgresso);
+    getIdUsuario()
+        .then(getProgressoUsuario)
+        .then(salvaProgresso);
 };
 
 const salvaProgresso = function(progresso) {

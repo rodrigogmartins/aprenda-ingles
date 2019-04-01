@@ -11,10 +11,16 @@
         <link rel="manifest" href="../manifest.json">
         <link rel="stylesheet" href="css/fundo.css">
         <link rel="stylesheet" href="css/atividade.css">
+        <link rel="stylesheet" href="css/load.css">
         <title> Ingles </title>
     </head>
     <body class="container">
-        <div class="row justify-content-center">
+        <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+        </div>
+
+        <div class="row justify-content-center" id="content">
             <div id="conteudo" class="col-12 col-lg-12 col-xl-12">
                 <div class="btn-group">
                     <button type="button" class="btn btn-dark dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -99,5 +105,6 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="module" src="js/fundo.js"></script>
     <script type="module" src="js/atividade.js"></script>
+    <script src="js/load.js"></script>
 </body>
 </html>

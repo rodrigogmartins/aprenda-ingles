@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }).then(atividadeModules.mostraAtividade);
 });
 
+
 for (const BUTTON of BUTTONS) {
     BUTTON.addEventListener('click', function(event) {
         verificaAcerto(event);

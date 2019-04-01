@@ -11,10 +11,16 @@
         <link rel="manifest" href="../manifest.json">
         <link rel="stylesheet" href="css/fundo.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/load.css">
         <title> Ingles </title>
     </head>
     <body class="container">
-        <div class="row justify-content-center">
+        <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+        </div>
+
+        <div class="row justify-content-center" id="content">
             <div id="conteudo" class="col-12 col-lg-7 col-xl-7">
                 <div id="informacoes">
                     <h1 id="titulo" class="text-center">
@@ -154,5 +160,6 @@
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="module" src="js/fundo.js"></script>
         <script type="module" src="js/main.js"></script>
+        <script src="js/load.js"></script>
     </body>
 </html>

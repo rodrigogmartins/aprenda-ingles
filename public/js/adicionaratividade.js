@@ -4,6 +4,7 @@ import {logout} from './modules/firebase-auth.js';
 
 const FORM = document.querySelector('#add-atividade');
 const BTN_SAIR = document.querySelector('#sair');
+const MAX_ATIVIDADES = 3;
 let atividade = null;
 let numeroDeAlternativasAdicionadas = 0;
 
@@ -19,7 +20,7 @@ FORM.adicionaratividade.addEventListener('click', function(e) {
 
 FORM.adicionaropcao.addEventListener('click', function(e) {
     numeroDeAlternativasAdicionadas++;
-    if (numeroDeAlternativasAdicionadas === 3) {
+    if (numeroDeAlternativasAdicionadas === MAX_ATIVIDADES) {
         FORM.adicionaropcao.setAttribute('disabled', true);
     }
     atividade.addOption = FORM.alternativa.value;

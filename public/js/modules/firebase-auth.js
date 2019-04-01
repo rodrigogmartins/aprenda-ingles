@@ -43,8 +43,9 @@ export const logout = function() {
 export const cadastro = function(email, senha) {
     AUTH.createUserWithEmailAndPassword(email, senha)
         .then(function() {
-            setProgressoUsuario(AUTH.currentUser.uid, '0').then(redirect);
+            setProgressoUsuario(AUTH.currentUser.uid, '0');
         })
+        .then(redirect)
         .catch(function(error) {
             feedback('#cadastro-alert');
         });

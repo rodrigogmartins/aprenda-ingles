@@ -19,7 +19,7 @@ export const atualizaBarraDeProgresso = function() {
     const PROGRESSO =
         localStorage.getItem('progresso').split(';').length;
     const TOTAL = parseInt(localStorage.getItem('quantTotalAtividades'));
-    const progresso = Math.round((PROGRESSO * 100) / TOTAL);
+    const progresso = Math.round(((PROGRESSO - 1) * 100) / TOTAL);
     PROGRESS_BAR.setAttribute('style', `width: ${progresso}%`);
     PROGRESS_BAR.textContent = `${progresso}%`;
 };

@@ -2,7 +2,10 @@ import {DATABASE} from './firebase.js';
 import {feedback} from './alert.js';
 
 export const setProgressoUsuario = function(userId, ordemVideo) {
-    const atividades = localStorage.getItem('progresso')+';'+ordemVideo;
+    let atividades = '0';
+    if (ordemVideo !== '0') {
+        atividades = localStorage.getItem('progresso')+';'+ordemVideo;
+    }
     DATABASE.ref(`/users/${userId}/progresso`).set({
         atividades: atividades
     });

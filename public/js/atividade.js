@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     progressoModules.getProgresso();
-    progressoModules.atualizaBarraDeProgresso();
     buscarTodasAtividades().then(function(r) {
         progressoModules.salvaAtividadeAtual(r);
         return buscarTodasAtividades();
@@ -35,7 +34,6 @@ const verificaAcerto = function(event) {
         getIdUsuario().then(atividadeModules.salvaUserId);
         buscarTodasAtividades().then(progressoModules.setProximaAtividade);
         progressoModules.getProgresso();
-        progressoModules.atualizaBarraDeProgresso();
         buscarTodasAtividades().then(function(r) {
             progressoModules.salvaAtividadeAtual(r);
             return buscarTodasAtividades();

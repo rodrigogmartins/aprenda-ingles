@@ -18,7 +18,11 @@ AUTH.onAuthStateChanged(function(user) {
 export const getIdUsuario = function() {
     return new Promise(function(resolve) {
         AUTH.onAuthStateChanged(function(user) {
-            resolve('anonimo');
+            if (user) {
+                resolve(user.uid);
+            } else {
+                resolve('anonimo');
+            }
         });
     });
 };

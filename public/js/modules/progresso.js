@@ -5,23 +5,17 @@ import {getProgressoUsuario, buscarTodasAtividades,
 export const getProgresso = function() {
     getIdUsuario()
         .then(getProgressoUsuario)
-        .then(salvaProgresso);
+        .then(atualizaBarraDeProgresso);
 };
 
-const salvaProgresso = function(progresso) {
-    localStorage.setItem('progresso', progresso.atividades);
-};
-
-export const atualizaBarraDeProgresso = function() {
+const atualizaBarraDeProgresso = function(progresso) {
     const PROGRESS_BAR = document.querySelector('.progress-bar');
+    const PROGRESSO = progresso.atividades.split(';').length;
     buscarTodasAtividades().then(quantTotalAtividades);
-    getProgresso();
-    const PROGRESSO =
-        localStorage.getItem('progresso').split(';').length;
     const TOTAL = parseInt(localStorage.getItem('quantTotalAtividades'));
-    const progresso = Math.round(((PROGRESSO - 1) * 100) / TOTAL);
-    PROGRESS_BAR.setAttribute('style', `width: ${progresso}%`);
-    PROGRESS_BAR.textContent = `${progresso}%`;
+    const progressoPorcentagem = Math.round(((PROGRESSO - 1) * 100) / TOTAL);
+    PROGRESS_BAR.setAttribute('style', `width: ${progressoPorcentagem}%`);
+    PROGRESS_BAR.textContent = `${progressoPorcentagem}%`;
 };
 
 const quantTotalAtividades = function(OBJECT) {

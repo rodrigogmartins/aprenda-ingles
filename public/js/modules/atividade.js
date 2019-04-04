@@ -1,9 +1,8 @@
 import {Atividade} from '../class/atividade.class.js';
 import {onYouTubeIframeAPIReady} from '../modules/yt-iframe.js';
 
-export const mostraAtividade = function(OBJECT) {
-    const MAP = new Map(Object.entries(OBJECT));
-    const ATIVIDADE_ATUAL = localStorage.getItem('atividadeAtual');
+export const mostraAtividade = function(TODAS_ATIVIDADES, ATIVIDADE_ATUAL) {
+    const MAP = new Map(Object.entries(TODAS_ATIVIDADES));
     const atividade = MAP.get(ATIVIDADE_ATUAL);
     const ATIVIDADE = new Atividade(atividade.codigo, atividade.tempoInicio,
         atividade.tempoPause, atividade.pergunta, atividade.resposta);
@@ -81,8 +80,4 @@ const mostraPergunta = function() {
 
 export const salvaResposta = function(objectAtividade) {
     localStorage.setItem('resposta', objectAtividade.resposta);
-};
-
-export const salvaUserId = function(userId) {
-    localStorage.setItem('userid', userId);
 };

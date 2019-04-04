@@ -1,45 +1,39 @@
 import {getIdUsuario} from './firebase-auth.js';
-import {getProgressoUsuario, buscarTodasAtividades,
-    setProgressoUsuario} from './firebase-db.js';
+import {getProgressoUsuario, buscarTodasAtividades} from './firebase-db.js';
 
-export const getProgresso = function() {
-    getIdUsuario()
-        .then(getProgressoUsuario)
-        .then(atualizaBarraDeProgresso);
+export const mostraBarraDeProgresso = function() {
+    buscarTodasAtividades()
+        .then(function(OBJECT) {
+            const TOTAL_ATIVIDADES = Object.keys(OBJECT).length;
+            getIdUsuario()
+                .then(getProgressoUsuario)
+                .then(function(progresso) {
+                    atualizaBarraDeProgresso(progresso, TOTAL_ATIVIDADES);
+                });
+        });
 };
 
-const atualizaBarraDeProgresso = function(progresso) {
+const atualizaBarraDeProgresso = function(progresso, totalAtividades) {
     const PROGRESS_BAR = document.querySelector('.progress-bar');
     const PROGRESSO = progresso.atividades.split(';').length;
-    buscarTodasAtividades().then(quantTotalAtividades);
-    const TOTAL = parseInt(localStorage.getItem('quantTotalAtividades'));
-    const progressoPorcentagem = Math.round(((PROGRESSO - 1) * 100) / TOTAL);
+    const progressoPorcentagem =
+        Math.round(((PROGRESSO - 1) * 100) / totalAtividades);
     PROGRESS_BAR.setAttribute('style', `width: ${progressoPorcentagem}%`);
     PROGRESS_BAR.textContent = `${progressoPorcentagem}%`;
 };
 
-const quantTotalAtividades = function(OBJECT) {
-    localStorage.setItem('quantTotalAtividades', Object.keys(OBJECT).length);
-};
-
-export const getAtividadeAtual = function() {
-    return localStorage.getItem('progresso').split(';').reverse()[0];
-};
-
-export const salvaAtividadeAtual = function(OBJECT) {
-    const INDICE = localStorage.getItem('progresso').split(';').reverse()[0];
-    const CHAVES = Object.keys(OBJECT);
-    localStorage.setItem('atividadeAtual', CHAVES[INDICE]);
-};
-
-export const setProximaAtividade = function(OBJECT) {
-    getProgresso();
-    const ATIVIDADE = getAtividadeAtual();
-    const CHAVES = Object.keys(OBJECT);
-    const PROXIMA_ATIVIDADE = parseInt(ATIVIDADE) + 1;
-    if (CHAVES[PROXIMA_ATIVIDADE]) {
-        const UID = localStorage.getItem('userid');
-        setProgressoUsuario(UID, PROXIMA_ATIVIDADE);
-        localStorage.setItem('atividadeAtual', CHAVES[PROXIMA_ATIVIDADE]);
-    }
+export const mostraAtividadeAtual = function(mostraAtividade) {
+    buscarTodasAtividades()
+        .then(function(TODAS_ATIVIDADES) {
+            const CHAVES = Object.keys(TODAS_ATIVIDADES);
+            getIdUsuario()
+                .then(getProgressoUsuario)
+                .then(function(progresso) {
+                    const ARRAY_ATIVIDADES = progresso.atividades.split(';');
+                    const INDICE_ATIVIDADE_ATUAL =
+                        ARRAY_ATIVIDADES.reverse()[0];
+                    const ATIVIDADE_ATUAL = CHAVES[INDICE_ATIVIDADE_ATUAL];
+                    mostraAtividade(TODAS_ATIVIDADES, ATIVIDADE_ATUAL);
+                });
+        });
 };

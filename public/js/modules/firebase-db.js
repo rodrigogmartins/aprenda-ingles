@@ -1,14 +1,36 @@
 import {DATABASE} from './firebase.js';
 import {feedback} from './alert.js';
 
-export const setProgressoUsuario = function(userId, ordemVideo) {
-    let atividades = '0';
-    if (ordemVideo !== '0') {
-        atividades = localStorage.getItem('progresso')+';'+ordemVideo;
-    }
-    DATABASE.ref(`/users/${userId}/progresso`).set({
-        atividades: atividades
-    });
+export const setProximaAtividade = function(userId) {
+    getProgressoUsuario(userId)
+        .then(function(progresso) {
+            let atividades = '0';
+
+            if (progresso.atividades) {
+                const proximaAtividade = getIndiceProximaAtividade(progresso);
+                atividades = `${progresso.atividades};${proximaAtividade}`;
+                return new Promise(function(resolve) {
+                    resolve(atividades);
+                });
+            }
+        })
+        .then(function(atv) {
+            DATABASE.ref(`/users/${userId}/progresso`)
+                .set({
+                    atividades: atv
+                });
+        }).then(reload);
+};
+
+const reload = function() {
+    window.location.reload();
+};
+
+const getIndiceProximaAtividade = function(progresso) {
+    const indicesProgresso = progresso.atividades.split(';');
+    let ultimaAtividade = indicesProgresso[indicesProgresso.length-1];
+    ultimaAtividade = parseInt(ultimaAtividade);
+    return (ultimaAtividade + 1) + '';
 };
 
 export const getProgressoUsuario = function(userId) {

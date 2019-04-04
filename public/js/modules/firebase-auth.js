@@ -1,5 +1,5 @@
 import {AUTH} from './firebase.js';
-import {setProgressoUsuario} from './firebase-db.js';
+import {setProximaAtividade} from './firebase-db.js';
 import {feedback} from './alert.js';
 
 AUTH.onAuthStateChanged(function(user) {
@@ -47,7 +47,7 @@ export const logout = function() {
 export const cadastro = function(email, senha) {
     AUTH.createUserWithEmailAndPassword(email, senha)
         .then(function() {
-            setProgressoUsuario(AUTH.currentUser.uid, '0');
+            setProximaAtividade(AUTH.currentUser.uid);
         })
         .then(redirect)
         .catch(function(error) {

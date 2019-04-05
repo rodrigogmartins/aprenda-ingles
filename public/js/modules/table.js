@@ -7,22 +7,13 @@ export const montarTabelaDeAtividades = function(OBJECT) {
         const TH_COD = criarLinhaTabela(CHAVES[i]);
         const TH_PERGUNTA = criarLinhaTabela(ATIVIDADE.pergunta);
         const TH_EDIT = document.createElement('th');
-        const BTN_EDIT = document.createElement('button');
-        const ICON = document.createElement('i');
-        ICON.setAttribute('class', 'fas fa-pen');
-        BTN_EDIT.setAttribute('class', 'btn btn-sm btn-block btn-warning');
-        BTN_EDIT.setAttribute('id', 'btn-edit');
-        BTN_EDIT.setAttribute('data-toggle', 'modal');
-        BTN_EDIT.setAttribute('data-target', '#modalEditarAtividade');
-        BTN_EDIT.appendChild(ICON);
-        TH_EDIT.appendChild(BTN_EDIT);
         const TH_DELETE = document.createElement('th');
-        const BTN_DELETE = document.createElement('button');
-        BTN_DELETE.textContent = 'X';
-        BTN_DELETE.setAttribute('id', 'btn-delete');
-        BTN_DELETE.setAttribute('class', 'btn btn-sm btn-block btn-danger');
-        TH_DELETE.appendChild(BTN_DELETE);
         const TR = document.createElement('tr');
+        const BTN_EDIT = criarBotaoEdit();
+        const BTN_DELETE = criarBotaoDelete();
+
+        TH_DELETE.appendChild(BTN_DELETE);
+        TH_EDIT.appendChild(BTN_EDIT);
         TR.appendChild(TH_COD);
         TR.appendChild(TH_PERGUNTA);
         TR.appendChild(TH_EDIT);
@@ -39,4 +30,26 @@ const criarLinhaTabela = function(texto) {
     SPAN.textContent = texto;
     TH.appendChild(SPAN);
     return TH;
+};
+
+const criarBotaoEdit = function() {
+    const BTN_EDIT = document.createElement('button');
+    const ICON = document.createElement('i');
+    ICON.setAttribute('class', 'fas fa-pen');
+    BTN_EDIT.setAttribute('class', 'btn btn-sm btn-block btn-warning');
+    BTN_EDIT.setAttribute('id', 'btn-edit');
+    BTN_EDIT.setAttribute('data-toggle', 'modal');
+    BTN_EDIT.setAttribute('data-target', '#modalEditarAtividade');
+    BTN_EDIT.appendChild(ICON);
+
+    return BTN_EDIT;
+};
+
+const criarBotaoDelete = function() {
+    const BTN_DELETE = document.createElement('button');
+    BTN_DELETE.textContent = 'X';
+    BTN_DELETE.setAttribute('id', 'btn-delete');
+    BTN_DELETE.setAttribute('class', 'btn btn-sm btn-block btn-danger');
+
+    return BTN_DELETE;
 };

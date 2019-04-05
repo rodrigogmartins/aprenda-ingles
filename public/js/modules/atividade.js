@@ -9,15 +9,10 @@ export const mostraAtividade = function(TODAS_ATIVIDADES, ATIVIDADE_ATUAL) {
     const alternativas = atividade.alternativas;
     alternativas.push(atividade.resposta);
     ATIVIDADE.alternativas = alternativas;
-    salvaResposta(ATIVIDADE);
-    salvaPergunta(ATIVIDADE);
+    window.location.hash = ATIVIDADE_ATUAL;
     montaVideo(ATIVIDADE);
-    mostraPergunta();
+    mostraPergunta(ATIVIDADE.pergunta);
     montaOpcoesAtividade(ATIVIDADE);
-};
-
-const salvaPergunta = function(atividade) {
-    localStorage.setItem('pergunta', atividade.pergunta);
 };
 
 const montaVideo = function(ATIVIDADE) {
@@ -37,6 +32,11 @@ const tempoEmSegundos = function(tempo) {
         segundos += (parseInt(TEMPO[2]) * 3600);
     }
     return segundos;
+};
+
+const mostraPergunta = function(pergunta) {
+    const CAMPO_PERGUNTA = document.querySelector('#titulo');
+    CAMPO_PERGUNTA.textContent = pergunta;
 };
 
 const montaOpcoesAtividade = function(ATIVIDADE) {
@@ -70,14 +70,4 @@ const mostrarAlternativas = function(alternativas) {
 
 const elementoNaoSorteado = function(vetor, elemento) {
     return vetor.indexOf(elemento) === -1;
-};
-
-const mostraPergunta = function() {
-    const PERGUNTA = localStorage.getItem('pergunta');
-    const CAMPO_PERGUNTA = document.querySelector('#titulo');
-    CAMPO_PERGUNTA.textContent = PERGUNTA;
-};
-
-export const salvaResposta = function(objectAtividade) {
-    localStorage.setItem('resposta', objectAtividade.resposta);
 };

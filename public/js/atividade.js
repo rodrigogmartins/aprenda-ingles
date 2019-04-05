@@ -1,5 +1,5 @@
 import {logout, getIdUsuario} from './modules/firebase-auth.js';
-import {setProximaAtividade} from './modules/firebase-db';
+import {setProximaAtividade, buscaAtividade} from './modules/firebase-db';
 import * as atividadeModules from './modules/atividade.js';
 import * as progressoModules from './modules/progresso.js';
 
@@ -20,14 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 for (const BUTTON of BUTTONS) {
     BUTTON.addEventListener('click', function(event) {
-        verificaAcerto(event);
+        const OPCAO = event.target.textContent;
+        const CODIGO = window.location.href.split('#').reverse()[0];
+        buscaAtividade(CODIGO)
+            .then(function(atividade) {
+                verificaAcerto(OPCAO, atividade);
+            });
     });
 }
 
-const verificaAcerto = function(event) {
-    const OPCAO = event.target.textContent;
-    const RESPOSTA = localStorage.getItem('resposta');
-    if (OPCAO === RESPOSTA) {
+const verificaAcerto = function(opcao, atividade) {
+    if (opcao === atividade.resposta) {
         getIdUsuario()
             .then(function(uid) {
                 const UID = uid;

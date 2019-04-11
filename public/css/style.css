@@ -14,3 +14,9 @@ body {
 .alert {
 	display: none;
 }
+
+#container-conteudo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

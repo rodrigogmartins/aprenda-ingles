@@ -5,11 +5,11 @@ export const mostraAtividade = function(TODAS_ATIVIDADES, ATIVIDADE_ATUAL) {
     const MAP = new Map(Object.entries(TODAS_ATIVIDADES));
     const atividade = MAP.get(ATIVIDADE_ATUAL);
     const ATIVIDADE = new Atividade(atividade.codigo, atividade.tempoInicio,
-        atividade.tempoPause, atividade.pergunta, atividade.resposta);
+        atividade.tempoPause, atividade.modulo, atividade.pergunta, atividade.resposta);
     const alternativas = atividade.alternativas;
     alternativas.push(atividade.resposta);
     ATIVIDADE.alternativas = alternativas;
-    window.location.hash = ATIVIDADE_ATUAL;
+    window.location.hash = ATIVIDADE.modulo;
     montaVideo(ATIVIDADE);
     mostraPergunta(ATIVIDADE.pergunta);
     montaOpcoesAtividade(ATIVIDADE);

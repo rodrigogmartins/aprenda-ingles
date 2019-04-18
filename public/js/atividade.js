@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     progressoModules.mostraBarraDeProgresso();
-    progressoModules.mostraAtividadeAtual(atividadeModules.mostraAtividade);
+    const MODULO = window.location.href.split('#').reverse()[0];
+    progressoModules.mostraAtividadeAtual(atividadeModules.mostraAtividade, MODULO);
 });
 
 
@@ -32,10 +33,7 @@ for (const BUTTON of BUTTONS) {
 const verificaAcerto = function(opcao, atividade) {
     if (opcao === atividade.resposta) {
         getIdUsuario()
-            .then(function(uid) {
-                const UID = uid;
-                setProximaAtividade(UID);
-            });
+            .then(setProximaAtividade);
     }
 };
 

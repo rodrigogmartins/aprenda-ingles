@@ -22,13 +22,14 @@ const atualizaBarraDeProgresso = function(progresso, totalAtividades) {
     PROGRESS_BAR.textContent = `${progressoPorcentagem}%`;
 };
 
-export const mostraAtividadeAtual = function(mostraAtividade) {
+export const mostraAtividadeAtual = function(mostraAtividade, modulo) {
     buscarTodasAtividades()
         .then(function(TODAS_ATIVIDADES) {
             const CHAVES = Object.keys(TODAS_ATIVIDADES);
             getIdUsuario()
                 .then(getProgressoUsuario)
                 .then(function(progresso) {
+                    console.log(progresso[modulo]);
                     const ARRAY_ATIVIDADES = progresso.atividades.split(';');
                     const INDICE_ATIVIDADE_ATUAL =
                         ARRAY_ATIVIDADES.reverse()[0];

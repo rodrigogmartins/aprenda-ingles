@@ -1,21 +1,22 @@
-import {DATABASE} from './firebase.js';
-import {feedback} from './alert.js';
+import {DATABASE} from '../firebase.js';
+import {feedback} from '../alert.js';
 
-export const setProximaAtividade = function(userId) {
-    getProgressoUsuario(userId)
+export const setProximaAtividade = function(userId, modulo) {
+    getProgressoUsuario(userId, modulo)
         .then(function(progresso) {
             let atividades = '0';
 
             if (progresso.atividades) {
                 const proximaAtividade = getIndiceProximaAtividade(progresso);
                 atividades = `${progresso.atividades};${proximaAtividade}`;
-                return new Promise(function(resolve) {
-                    resolve(atividades);
-                });
             }
+
+            return new Promise(function(resolve) {
+                resolve(atividades);
+            });
         })
         .then(function(atv) {
-            DATABASE.ref(`/users/${userId}/progresso`)
+            DATABASE.ref(`/users/${userId}/progresso/${modulo}`)
                 .set({
                     atividades: atv
                 });
@@ -34,7 +35,7 @@ const getIndiceProximaAtividade = function(progresso) {
 };
 
 export const getProgressoUsuario = function(userId) {
-    const USER = DATABASE.ref(`/users/${userId}/progresso`);
+    const USER = DATABASE.ref(`/users/${userId}/progresso/${modulo}`);
 
     return new Promise(function(resolve) {
         USER.once('value', function(snapshot) {
@@ -43,31 +44,33 @@ export const getProgressoUsuario = function(userId) {
     });
 };
 
-export const adicionarAtividade = function(atividade) {
-    DATABASE.ref(`atividades/${Date.now()}`).set({
-        codigo: atividade.codigo,
-        tempoInicio: atividade.tempoInicio,
-        tempoPause: atividade.tempoPause,
-        pergunta: atividade.pergunta,
-        resposta: atividade.resposta,
-        alternativas: atividade.alternativas
-    }).then(function() {
-        feedback('#add-atividade-succsess-alert');
-    }).catch(function() {
-        feedback('#add-atividade-error-alert');
-    });
+export const adicionarAtividade = function(modulo, atividade) {
+    DATABASE.ref(`modulo/${modulo}/${Date.now()}`)
+        .set({
+            codigo: atividade.codigo,
+            tempoInicio: atividade.tempoInicio,
+            tempoPause: atividade.tempoPause,
+            pergunta: atividade.pergunta,
+            resposta: atividade.resposta,
+            alternativas: atividade.alternativas
+        }).then(function() {
+            feedback('#add-atividade-succsess-alert');
+        }).catch(function() {
+            feedback('#add-atividade-error-alert');
+        });
 };
 
-export const excluirAtividade = function(key) {
-    const ATIVIDADE = DATABASE.ref(`/atividades/${key}`);
+export const excluirAtividade = function(modulo, chaveAtividade) {
+    const ATIVIDADE = DATABASE.ref(`modulo/${modulo}/${chaveAtividade}`);
     ATIVIDADE.remove();
-    const TBODY = document.querySelector('#tbody');
-    TBODY.innerHTML = '';
-    buscarTodasAtividades();
+
+    return new Promise(function(resolve) {
+        resolve();
+    })
 };
 
-export const buscaAtividade = function(chaveAtividade) {
-    const ATIVIDADE = DATABASE.ref(`/atividades/${chaveAtividade}`);
+export const buscaAtividade = function(modulo, chaveAtividade) {
+    const ATIVIDADE = DATABASE.ref(`modulo/${modulo}/${chaveAtividade}`);
 
     return new Promise(function(resolve) {
         ATIVIDADE.once('value', function(snapshot) {
@@ -76,8 +79,8 @@ export const buscaAtividade = function(chaveAtividade) {
     });
 };
 
-export const buscarTodasAtividades = function() {
-    const ARVORE_PAI = DATABASE.ref('/atividades/');
+export const buscarTodasAtividades = function(modulo) {
+    const ARVORE_PAI = DATABASE.ref(`/modulo/${modulo}`);
 
     return new Promise(function(resolve) {
         ARVORE_PAI.once('value', function(snapshot) {
@@ -87,7 +90,7 @@ export const buscarTodasAtividades = function() {
 };
 
 export const editarAtividade = function(chaveAtividade, atividade) {
-    DATABASE.ref(`/atividades/${chaveAtividade}`).set({
+    DATABASE.ref(`modulo/${modulo}/${chaveAtividade}`).set({
         codigo: atividade.codigo,
         tempoInicio: atividade.tempoInicio,
         tempoPause: atividade.tempoPause,

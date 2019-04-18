@@ -39,7 +39,8 @@ T_BODY.addEventListener('click', function(e) {
             .then(montaAtividade)
             .then(mostraAtividade);
     } else if (e.target.tagName === 'BUTTON' && e.target.id === 'btn-delete') {
-        excluirAtividade(e.target.parentElement.parentElement.dataset['key']);
+        excluirAtividade(e.target.parentElement.parentElement.dataset['key'])
+            .then(atualizaTabela);
     }
 });
 
@@ -61,3 +62,9 @@ const mostraAtividade = function(atividade) {
         document.querySelector(`#alternativa${i}`).value = alternativas[i];
     }
 };
+
+const atualizaTabela = function() {
+    const TBODY = document.querySelector('#tbody');
+    TBODY.innerHTML = '';
+    buscarTodasAtividades();
+}

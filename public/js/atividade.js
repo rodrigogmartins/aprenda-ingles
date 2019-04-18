@@ -1,5 +1,5 @@
 import {logout, getIdUsuario} from './modules/firebase-auth.js';
-import {setProximaAtividade, buscaAtividade} from './modules/firebase-db';
+import {setProximaAtividade, buscaAtividade} from './modules/crud/atividade.crud.js';
 import * as atividadeModules from './modules/atividade.js';
 import * as progressoModules from './modules/progresso.js';
 

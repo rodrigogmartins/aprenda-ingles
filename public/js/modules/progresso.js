@@ -1,5 +1,5 @@
 import {getIdUsuario} from './firebase-auth.js';
-import {getProgressoUsuario, buscarTodasAtividades} from './firebase-db.js';
+import {getProgressoUsuario, buscarTodasAtividades} from './crud/atividade.crud.js';
 
 export const mostraBarraDeProgresso = function() {
     buscarTodasAtividades()

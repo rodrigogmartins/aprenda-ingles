@@ -1,9 +1,9 @@
-import {buscarTodasAtividades, excluirAtividade,
-    buscaAtividade, editarAtividade}
-    from './modules/firebase-db.js';
 import {logout} from './modules/firebase-auth.js';
 import {Atividade} from './class/atividade.class.js';
 import {montarTabelaDeAtividades} from './modules/table.js';
+import {buscarTodasAtividades, excluirAtividade,
+    buscaAtividade, editarAtividade}
+    from './modules/crud/atividade.crud.js';
 
 const BTN_SAIR = document.querySelector('#sair');
 const T_BODY = document.querySelector('tbody');

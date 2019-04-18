@@ -1,5 +1,5 @@
 import {Atividade} from './class/atividade.class.js';
-import {adicionarAtividade} from './modules/firebase-db';
+import {adicionarAtividade} from './modules/crud/atividade.crud.js';
 import {logout} from './modules/firebase-auth.js';
 
 const FORM = document.querySelector('#add-atividade');

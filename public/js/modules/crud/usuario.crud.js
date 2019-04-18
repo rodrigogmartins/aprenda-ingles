@@ -1,5 +1,5 @@
-import {AUTH} from './firebase.js';
-import {setProximaAtividade} from './firebase-db.js';
+import {AUTH} from '../firebase.js';
+import {setProximaAtividade} from './atividade.crud.js';
 import {feedback} from './alert.js';
 
 export const cadastro = function(email, senha) {

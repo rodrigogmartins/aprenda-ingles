@@ -1,14 +1,10 @@
 import {Atividade} from './class/atividade.class.js';
 import {adicionarAtividade} from './modules/crud/atividade.crud.js';
-import {logout} from './modules/firebase-auth.js';
 
 const FORM = document.querySelector('#add-atividade');
-const BTN_SAIR = document.querySelector('#sair');
 const MAX_ATIVIDADES = 3;
 let atividade = null;
 let numeroDeAlternativasAdicionadas = 0;
-
-BTN_SAIR.addEventListener('click', logout);
 
 FORM.adicionaratividade.addEventListener('click', function(e) {
     atividade = new Atividade(FORM.url.value.split('=')[1],

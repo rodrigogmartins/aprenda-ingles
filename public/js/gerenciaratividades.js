@@ -1,16 +1,12 @@
-import {logout} from './modules/firebase-auth.js';
 import {Atividade} from './class/atividade.class.js';
 import {montarTabelaDeAtividades} from './modules/table.js';
 import {buscarTodasAtividades, excluirAtividade,
     buscaAtividade, editarAtividade}
     from './modules/crud/atividade.crud.js';
 
-const BTN_SAIR = document.querySelector('#sair');
 const T_BODY = document.querySelector('tbody');
 const FORM = document.querySelector('#alterar');
 const BTN_EDIT = document.querySelector('#editar');
-
-BTN_SAIR.addEventListener('click', logout);
 
 document.addEventListener('DOMContentLoaded', function() {
     buscarTodasAtividades().then(montarTabelaDeAtividades)

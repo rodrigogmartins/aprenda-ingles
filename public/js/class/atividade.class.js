@@ -1,8 +1,9 @@
 export class Atividade {
-    constructor(codigo, tempoInicio, tempoPause, pergunta, resposta) {
+    constructor(codigo, tempoInicio, tempoPause, modulo, pergunta, resposta) {
         this._codigo = codigo;
         this._tempoInicio = tempoInicio;
         this._tempoPause = tempoPause;
+        this._modulo = modulo;
         this._pergunta = pergunta;
         this._resposta = resposta;
         this._alternativas = [];
@@ -28,6 +29,10 @@ export class Atividade {
 
     get tempoPause() {
         return this._tempoPause;
+    }
+
+    get modulo() {
+        return this._modulo;
     }
 
     get pergunta() {

@@ -11,7 +11,7 @@
         <link rel="manifest" href="../manifest.json">
         <link rel="stylesheet" href="css/fundo.css">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/gerenciaratividades.css">
+        <link rel="stylesheet" href="css/adicionaratividade.css">
         <link rel="stylesheet" href="css/load.css">
         <title> Ingles </title>
     </head>
@@ -20,8 +20,8 @@
             <div class="dot1"></div>
             <div class="dot2"></div>
         </div>
-
-        <div class="row justify-content-center" id="content">
+    
+        <div class="row block" id="content">
             <div id="conteudo" class="col-12 col-lg-12 col-xl-12">
                 <div class="btn-group">
                     <button type="button" class="btn btn-dark dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,6 +35,10 @@
                         <a class="btn btn-md btn-block btn-primary" href="./adicionaratividade.html"> ADICIONAR ATIVIDADES </a>
                         <div id="usuario-logado">
                             <hr>
+                            <a class="btn btn-md btn-block btn-primary" href="./gerenciarusuario.html">
+                                GERENCIAR PERFIL
+                            </a>
+                            <hr>
                             <a class="btn btn-md btn-block btn-primary" href="./gerenciaratividade.html">
                                 GERENCIAR ATIVIDADES
                             </a>
@@ -46,62 +50,40 @@
 
                 <div id="informacoes" class="col-12 col-lg-12 col-xl-12">
                     <h1 id="titulo" class="text-center">
-                        Gerenciar Atividades
+                        Adicionar Modulo
                     </h1>
-                    <button class="btn btn-md btn-block btn-primary" data-toggle="modal" data-target="#modalAlterarDados">              ALTERAR SENHA
-                    </button>
-                    <button class="btn btn-md btn-block btn-danger" id="delete-accont"> DELETAR CONTA </button>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="modalAlterarDados" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title"> Alterar Senha </h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-success alert-dismissible fade show" id="update-success-alert" role="alert">
-                        <strong> SUCESSO AO ALTERAR A SENHA! </strong>
-                        <button type="button" class="close fechar" aria-label="Close">
-                            <span aria-hidden="true"> &times; </span>
-                        </button>
-                    </div>
-                    <div class="alert alert-danger alert-dismissible fade show" id="update-unsuccess-alert" role="alert">
-                        <strong> ERRO AO ATUALIZAR CADASTRO! </strong>
+                    <div class="alert alert-danger alert-dismissible fade show col-12 col-lg-6 col-xl-6 offset-lg-3 offset-xl-3" id="add-modulo-error-alert" role="alert">
+                        <strong> ERRO AO ADICIONAR MODULO! </strong>
                         <br>
                         <span>
-                            A senha deve ter entre 6 e 20 caracteres A-Z ou a-z e !@#-_$%^*()+=\|/.
+                            Verifique se todos os campos foram preenchidos corretamente e tente novamente.
                         </span>
                         <button type="button" class="close fechar" aria-label="Close">
                             <span aria-hidden="true"> &times; </span>
                         </button>
                     </div>
-                    <hr>
-                    <form action="#" id="login">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> Nova Senha </span>
-                            </div>
-                            <input type="password" id="senha" aria-label="Senha" class="form-control" required pattern="(\w|[!@#-_$%^*()+=\|/]){6,20}">
-                        </div>
+                    <div class="alert alert-success alert-dismissible fade show col-12 col-lg-6 col-xl-6 offset-lg-3 offset-xl-3" id="add-modulo-succsess-alert" role="alert">
+                        <strong> SUCESSO AO ADICIONAR MODULO! </strong>
+                        <button type="button" class="close fechar" aria-label="Close">
+                            <span aria-hidden="true"> &times; </span>
+                        </button>
+                    </div>
 
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> Confirmar Senha </span>
+                    <div id="dados-usuario" class="col-12 col-lg-6 col-xl-6 offset-lg-3 offset-xl-3">
+                        <form action="#" id="add-modulo">
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
                             </div>
-                            <input type="password" id="confirmar-senha" aria-label="Confirmar Senha" class="form-control" required pattern="(\w|[!@#-_$%^\*()+=\|/]){6,20}">
-                        </div>
-                    </form>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1"> Modulo Privado </label>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-block btn-primary" name="adicionarmodulo" id="adicionar-modulo">
+                                Adicionar Modulo
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
-                  <button type="button" class="btn btn-primary" id="alterar"> Alterar </button>
-                </div>
-              </div>
             </div>
         </div>
 
@@ -111,11 +93,11 @@
             <canvas></canvas>
         </div>
 
-    <!--<p>See the Pen
-            <a href="https://codepen.io/j1f/pen/ogGpZb/">
-                Canva moving background effect
-            </a> by Justin.
-        </p>
+        <!--<p>See the Pen
+                <a href="https://codepen.io/j1f/pen/ogGpZb/">
+                    Canva moving background effect
+                </a> by Justin.
+            </p>
         -->
 
         <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
@@ -124,7 +106,7 @@
         <script src="../node_modules/popper.js/dist/popper.min.js"></script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="module" src="js/fundo.js"></script>
-        <script type="module" src="js/gerenciarusuario.js"></script>
+        <script type="module" src="js/adicionarmodulo.js"></script>
         <script type="module" src="js/logout.js"></script>
         <script type="module" src="js/load.js"></script>
     </body>

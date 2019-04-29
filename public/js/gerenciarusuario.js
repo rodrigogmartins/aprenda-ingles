@@ -1,13 +1,10 @@
-import {logout} from './modules/firebase-auth.js';
 import {alterarSenha, deletar} from './modules/crud/usuario.crud.js';
 
 const BTN_ALTERAR = document.querySelector('#alterar');
 const BTN_DELETE = document.querySelector('#delete-accont');
 const CLOSE = document.querySelectorAll('.fechar');
 const ALERT = document.querySelectorAll('.alert');
-const BTN_SAIR = document.querySelector('#sair');
 
-BTN_SAIR.addEventListener('click', logout);
 BTN_DELETE.addEventListener('click', deletar);
 
 BTN_ALTERAR.addEventListener('click', function() {

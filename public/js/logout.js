@@ -1,4 +1,4 @@
-import {logout} from './modules/firebase-auth.js';
+import { logout } from './modules/firebase-auth.js';
 
 const BTN_SAIR = document.querySelector('#sair');
 

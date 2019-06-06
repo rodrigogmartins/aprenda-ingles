@@ -1,4 +1,4 @@
-import {config} from './config-fundo.js';
+import { config } from './config-fundo.js';
 
 export const animate = function() {
     makeCircle();

@@ -1,4 +1,4 @@
-import {config} from './config.firebase.js';
+import { config } from './config.firebase.js';
 
 export const FIREBASE = require('firebase');
 

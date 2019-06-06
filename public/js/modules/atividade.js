@@ -1,6 +1,6 @@
-import {onYouTubeIframeAPIReady} from '../modules/yt-iframe.js';
+import { onYouTubeIframeAPIReady } from '../modules/yt-iframe.js';
 
-export const mostraAtividade = function(ATIVIDADE) {    
+export const mostraAtividade = function(ATIVIDADE) {
     montaVideo(ATIVIDADE);
     mostraPergunta(ATIVIDADE.pergunta);
     montaOpcoesAtividade(ATIVIDADE);
@@ -36,7 +36,7 @@ const mostraPergunta = function(pergunta) {
 
 const montaOpcoesAtividade = function(ATIVIDADE) {
     const OPCOES = ATIVIDADE.alternativas;
-    
+
     mostrarAlternativas(OPCOES);
 };
 

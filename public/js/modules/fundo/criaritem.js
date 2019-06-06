@@ -1,6 +1,6 @@
-import {config, cancelAnimationFrame, requestAnimationFrame}
+import { config, cancelAnimationFrame, requestAnimationFrame }
     from './config-fundo.js';
-import {animate} from './animate.js';
+import { animate } from './animate.js';
 
 export const createItem = function() {
     desenhaCirculos();

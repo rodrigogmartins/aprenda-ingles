@@ -69,7 +69,6 @@ export const adicionarAtividade = function(modulo, atividade) {
 
 export const excluirAtividade = function(modulo, chaveAtividade) {
     const ATIVIDADE = DATABASE.ref(`modulos/${modulo}/${chaveAtividade}`);
-
     ATIVIDADE.remove();
 
     return new Promise(function(resolve) {
@@ -97,7 +96,7 @@ export const buscarTodasAtividades = function(modulo) {
     });
 };
 
-export const editarAtividade = function(chaveAtividade, atividade) {
+export const editarAtividade = function(modulo, chaveAtividade, atividade) {
     DATABASE.ref(`modulos/${modulo}/${chaveAtividade}`).set({
         codigo: atividade.codigo,
         tempoInicio: atividade.tempoInicio,

@@ -1,6 +1,6 @@
-import {getIdUsuario} from './firebase-auth.js';
-import {Atividade} from '../class/atividade.class.js';
-import {getProgressoUsuario, buscarTodasAtividades} from './crud/atividade.crud.js';
+import { getIdUsuario } from './firebase-auth.js';
+import { Atividade } from '../class/atividade.class.js';
+import { getProgressoUsuario, buscarTodasAtividades } from './crud/atividade.crud.js';
 
 export const mostraBarraDeProgresso = function() {
     const HASH = window.location.hash.replace('#', '').split('&');
@@ -31,7 +31,7 @@ const buscarProgressoModulo = function(progresso, modulo) {
         if (chave[0] === modulo) {
             return chave[1].replace('}', '');
         }
-    }      
+    }
 }
 
 const atualizaBarraDeProgresso = function(progresso, totalAtividades) {
@@ -51,7 +51,7 @@ export const getAtividadeAtual = function() {
 
     buscarTodasAtividades(MODULO)
         .then(function(TODAS_ATIVIDADES) {
-            const CHAVES = Object.keys(TODAS_ATIVIDADES);    
+            const CHAVES = Object.keys(TODAS_ATIVIDADES);
             const MAP = new Map(Object.entries(TODAS_ATIVIDADES));
             const ATIVIDADE_ATUAL = CHAVES[INDICE_ATIVIDADE_ATUAL];
             const atividade = MAP.get(ATIVIDADE_ATUAL);

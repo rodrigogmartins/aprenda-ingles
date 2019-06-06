@@ -1,5 +1,5 @@
-import {Atividade} from './class/atividade.class.js';
-import {adicionarAtividade} from './modules/crud/atividade.crud.js';
+import { Atividade } from './class/atividade.class.js';
+import { adicionarAtividade } from './modules/crud/atividade.crud.js';
 
 const FORM = document.querySelector('#add-atividade');
 const MAX_ATIVIDADES = 3;

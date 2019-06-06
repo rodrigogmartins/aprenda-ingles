@@ -1,5 +1,5 @@
-import {login} from './modules/firebase-auth.js';
-import {cadastro} from './modules/crud/usuario.crud.js';
+import { login } from './modules/firebase-auth.js';
+import { cadastro } from './modules/crud/usuario.crud.js';
 
 const BTN_ENTRAR = document.querySelector('#entrar');
 const BTN_CADASTRO = document.querySelector('#cadastrar');

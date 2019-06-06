@@ -1,5 +1,5 @@
-import {AUTH} from './firebase.js';
-import {feedback} from './alert.js';
+import { AUTH } from './firebase.js';
+import { feedback } from './alert.js';
 
 AUTH.onAuthStateChanged(function(user) {
     const DIV_LOGADO = document.querySelector('#usuario-logado');

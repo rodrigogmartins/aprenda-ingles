@@ -1,5 +1,5 @@
-import {createItem} from './modules/fundo/criaritem.js';
-import {config} from './modules/fundo/config-fundo.js';
+import { createItem } from './modules/fundo/criaritem.js';
+import { config } from './modules/fundo/config-fundo.js';
 const jQuery = require('jquery');
 
 jQuery(document).ready(function($) {
@@ -27,9 +27,7 @@ jQuery(document).ready(function($) {
             config.wWidth = $(window).width();
             config.wHeight = $(window).height(),
             canvas.each(function() {
-                // eslint-disable-next-line no-invalid-this
                 this.width = config.wWidth;
-                // eslint-disable-next-line no-invalid-this
                 this.height = config.wHeight;
             });
         };

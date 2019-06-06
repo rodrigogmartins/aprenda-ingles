@@ -1,6 +1,6 @@
-import {AUTH} from '../firebase.js';
-import {setProximaAtividade} from './atividade.crud.js';
-import {feedback} from '../alert.js';
+import { AUTH } from '../firebase.js';
+import { setProximaAtividade } from './atividade.crud.js';
+import { feedback } from '../alert.js';
 
 export const cadastro = function(email, senha) {
     AUTH.createUserWithEmailAndPassword(email, senha)
@@ -19,7 +19,7 @@ const redirect = function() {
 
 export const deletar = function() {
     const USER = AUTH.currentUser;
-    
+
     USER.delete()
         .then(function() {
             window.location.replace('index.html');

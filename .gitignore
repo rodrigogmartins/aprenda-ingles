@@ -79,6 +79,9 @@ dist/
 # arquivo de configurações
 public/js/modules/config.firebase.js
 
+# package-lock
+package-lock.json
+
 # next.js build output
 .next
 

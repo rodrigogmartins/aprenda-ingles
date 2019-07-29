@@ -2,40 +2,43 @@ import { DATABASE } from '../firebase.js';
 import { feedback } from '../alert.js';
 
 export const setProximaAtividade = function(userId, modulo) {
+    const mdl = modulo;
     getProgressoUsuario(userId)
         .then(function(progresso) {
             const MAP = new Map(Object.entries(progresso));
-            const PROGRESSO_ANTIGO = MAP.get(modulo);
-            let novoProgresso = '0';
+            const PROGRESSO_ANTIGO = MAP.get(mdl);
+            let novoProgresso = '0;';
 
-            if (PROGRESSO_ANTIGO) {
+            if (PROGRESSO_ANTIGO !== undefined) {
                 const proximaAtividade = getIndiceProximaAtividade(PROGRESSO_ANTIGO);
-                novoProgresso = `${PROGRESSO_ANTIGO};${proximaAtividade}`;
+                novoProgresso = `${PROGRESSO_ANTIGO}${proximaAtividade};`;
             }
 
             return new Promise(function(resolve) {
-                resolve(novoProgresso);
+                resolve([modulo, novoProgresso]);
             });
         })
         .then(function(progresso) {
-            const OBJETO = JSON.parse(`{"${modulo}":"${progresso}"}`);
+            const OBJETO = JSON.parse(`{"${progresso[0]}":"${progresso[1]}"}`);
 
             DATABASE.ref(`/users/${userId}/progresso`).set(OBJETO);
-        }).then(function(modulo, progresso) {
-            reload(modulo, progresso);
-        });
+
+            return new Promise(function(resolve) {
+                resolve(progresso);
+            });
+        }).then(reload);
 };
 
-const reload = function(modulo, atividade) {
-    const HREF = window.location.href;
-    const HASH = `#${modulo}&${atividade}`;
-    window.location.href = HREF + HASH;
+const reload = function(progresso) {
+    const ultimaAtividade = progresso[1].split(';').reverse()[1];
+
+    window.location.replace(`atividade.html#${progresso[0]}&${ultimaAtividade}`);
     window.location.reload();
 };
 
 const getIndiceProximaAtividade = function(progresso) {
     const indicesProgresso = progresso.split(';');
-    let ultimaAtividade = indicesProgresso[indicesProgresso.length-1];
+    let ultimaAtividade = indicesProgresso[indicesProgresso.length-2];
     ultimaAtividade = parseInt(ultimaAtividade);
 
     return (ultimaAtividade + 1) + '';

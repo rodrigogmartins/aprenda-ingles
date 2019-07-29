@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
         <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <meta name="theme-color" content="#0c46ba">
-        <link rel="manifest" href="../manifest.json">
         <link rel="stylesheet" href="css/fundo.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/load.css">
@@ -37,7 +36,9 @@
                         Entrar
                     </button>
 
-                    <a class="btn btn-lg btn-block btn-primary" role="button" href="atividade.html"> Prosseguir Sem Cadastro </a>
+                    <button class="btn btn-lg btn-block btn-secondary" data-toggle="modal" data-target="#modalCadastro">
+                        Cadastrar
+                    </button>
                 </div>
             </div>
         </div>
@@ -75,11 +76,6 @@
                                 <input type="password" id="senha-login" aria-label="Senha" class="form-control" required>
                             </div>
                         </form>
-                        <hr>
-                        <h5> Ainda não possui cadastro?</h5>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
-                            Cadastrar
-                        </button>
                     </div>
                     <div class="modal-footer">
                         <div>

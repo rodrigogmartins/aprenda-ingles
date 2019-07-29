@@ -1,18 +1,14 @@
 import { AUTH } from './firebase.js';
 import { feedback } from './alert.js';
+import { getProgressoUsuario } from './crud/atividade.crud.js';
 
-AUTH.onAuthStateChanged(function(user) {
-    const DIV_LOGADO = document.querySelector('#usuario-logado');
-    if (user) {
-        if (DIV_LOGADO) {
-            DIV_LOGADO.style.display = 'block';
-        }
-    } else {
-        if (DIV_LOGADO) {
-            DIV_LOGADO.style.display = 'none';
-        }
-    }
-});
+// AUTH.onAuthStateChanged(function(user) {
+//     if (user) {
+//         logado
+//     } else {
+//         nao-logado
+//     }
+// });
 
 export const getIdUsuario = function() {
     return new Promise(function(resolve) {
@@ -29,7 +25,7 @@ export const getIdUsuario = function() {
 export const login = function(email, senha) {
     AUTH.signInWithEmailAndPassword(email, senha)
         .then(function() {
-            window.location.replace('atividade.html');
+            window.location.replace('modulos.html');
         })
         .catch(function(error) {
             feedback('#login-alert');

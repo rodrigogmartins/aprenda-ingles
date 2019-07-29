@@ -1,0 +1,150 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    background-color: rgb(125, 164, 243);
+    font-family: Poppins, sans-serif;
+}
+
+#search-field {
+    margin-bottom: 1em;
+	display: flex;
+	justify-content: center;
+}
+
+.modulos {
+    max-height: 70vh;
+    overflow-y: scroll;
+    display: flex;
+	flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.modulos::-webkit-scrollbar {
+    width: 3px;
+    background: #F4F4F4;
+}
+.modulos::-webkit-scrollbar {
+    width: 3px;
+    background: #F4F4F4;
+}
+.modulos::-webkit-scrollbar-thumb {
+    background: #dad7d7;
+}
+
+.modulo {
+    font-size: 20px;
+    padding: 15px;
+    margin: .2em;
+    display: block;
+}
+
+#display-sencondary {
+    width: 80vw;
+}
+
+#titulo {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.tamanho-menu {
+	padding: 10px 10px;
+	width: 30vw;
+}
+
+@media only screen and (min-width: 1000px) {
+	body {
+		display: flex;
+		justify-content: center;
+		height: 100vh;
+		align-items: center;
+		background-color: #7da4f3;
+    }
+
+    #display-sencondary {
+        width: 60vw;
+    }
+
+    .tamanho-menu {
+        width: 400px;
+    }
+
+    .modulo {
+        max-width: 320px;
+    }
+}
+
+
+@media only screen and (max-width: 1000px) {
+    body {
+        margin-top: 2em;
+        margin-bottom: 1em;
+    }
+
+    #titulo {
+        margin-top: .7em;
+        margin-bottom: 1.3em;
+        color: white;
+        font-size: 2em;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .tamanho-menu {
+        width: 70vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .tamanho-menu {
+        width: 50vw;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .tamanho-menu {
+        width: 40vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .tamanho-menu {
+        width: 30vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .tamanho-menu {
+        width: 30vw;
+    }
+}
+
+#botoes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#botoes-cima {
+    margin-bottom: .5em;
+}
+
+#progresso {
+    margin-bottom: 2em;
+    margin-top: -2em;
+    height: 2.5em;
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    padding: 0px;
+}
+
+#player {
+    height: 50vh;
+    margin-bottom: 1em;
+    border: none;
+}

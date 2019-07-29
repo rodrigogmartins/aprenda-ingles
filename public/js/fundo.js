@@ -1,5 +1,6 @@
 import { createItem } from './modules/fundo/criaritem.js';
 import { config } from './modules/fundo/config-fundo.js';
+
 const jQuery = require('jquery');
 
 jQuery(document).ready(function($) {

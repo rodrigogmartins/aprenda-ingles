@@ -1,4 +1,5 @@
 import { mostraAtividade } from './modules/atividade.js';
+import { getIdUsuario } from './modules/firebase-auth.js';
 import { setProximaAtividade } from './modules/crud/atividade.crud.js';
 import { mostraBarraDeProgresso, getAtividadeAtual } from './modules/progresso.js';
 
@@ -25,7 +26,12 @@ for (const BUTTON of BUTTONS) {
 const verificaAcerto = function(opcao, atividade) {
     if (opcao === atividade.resposta) {
         getIdUsuario()
-            .then(setProximaAtividade);
+            .then(function(userId) {
+                const HASH = window.location.hash.replace('#', '').split('&');
+                const MODULO = HASH[0];
+
+                setProximaAtividade(userId, MODULO);
+            });
     }
 };
 

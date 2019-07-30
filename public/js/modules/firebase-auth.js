@@ -1,22 +1,11 @@
-import { AUTH } from './firebase.js';
-import { feedback } from './alert.js';
-import { getProgressoUsuario } from './crud/atividade.crud.js';
-
-// AUTH.onAuthStateChanged(function(user) {
-//     if (user) {
-//         logado
-//     } else {
-//         nao-logado
-//     }
-// });
+import {AUTH} from './firebase.js';
+import {feedback} from './alert.js';
 
 export const getIdUsuario = function() {
     return new Promise(function(resolve) {
         AUTH.onAuthStateChanged(function(user) {
             if (user) {
                 resolve(user.uid);
-            } else {
-                resolve('anonimo');
             }
         });
     });

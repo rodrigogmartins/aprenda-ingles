@@ -8,15 +8,15 @@ body {
 
 #search-field {
     margin-bottom: 1em;
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .modulos {
     max-height: 70vh;
     overflow-y: scroll;
-    display: flex;
 	flex-wrap: wrap;
+    display: flex;
     justify-content: space-between;
     padding: 0 10px;
 }
@@ -25,6 +25,7 @@ body {
     width: 3px;
     background: #F4F4F4;
 }
+
 .modulos::-webkit-scrollbar {
     width: 3px;
     background: #F4F4F4;
@@ -46,7 +47,6 @@ body {
 
 #titulo {
     margin-top: 2em;
-    margin-bottom: 2em;
 }
 
 .tamanho-menu {

@@ -20,7 +20,7 @@
         </div>
 
         <div class="row justify-content-center" id="content">
-            <div id="conteudo" class="col-12 col-lg-12 col-xl-12">
+            <div id="conteudo" class="col-12 col-lg-12 col-xl-12" style="display: none">
                 <div id="menu" class="btn-group">
                     <button type="button" class="btn btn-dark dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bars"></i>
@@ -49,25 +49,18 @@
                     </h3>
                 </div>
 
-                <div id="search-field" class="col-9 col-lg-5 col-xl-4 offset-xl-4">
+                <div id="search-field" class="col-12 col-lg-12 col-xl-12 offset-xl-12">
                     <form class="form-inline">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-primary" type="submit"> Buscar </button>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nome do módulo">
+                            <div class="input-group-append">
+                                <button class="btn btn-dark" type="submit" id="button-addon2"> Buscar </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
+
                 <div class="col-12 col-lg-10 col-xl-12 modulos">
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> TrabalhoTrabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> TrabalhoTrabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
-                    <a class="modulo col-12 col-lg-5 col-xl-4 btn btn-light"> Trabalho </a>
                 </div>
 
             </div>
@@ -92,6 +85,6 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="module" src="js/fundo.js"></script>
     <script type="module" src="js/logout.js"></script>
-    <script type="module" src="js/load.js"></script>
+    <script type="module" src="js/modulos-atividade.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-import { DATABASE } from '../firebase.js';
-import { feedback } from '../alert.js';
+import {DATABASE} from '../firebase.js';
+import {feedback} from '../alert.js';
 
 export const setProximaAtividade = function(userId, modulo) {
     const mdl = modulo;
@@ -10,7 +10,8 @@ export const setProximaAtividade = function(userId, modulo) {
             let novoProgresso = '0;';
 
             if (PROGRESSO_ANTIGO !== undefined) {
-                const proximaAtividade = getIndiceProximaAtividade(PROGRESSO_ANTIGO);
+                const proximaAtividade =
+                    getIndiceProximaAtividade(PROGRESSO_ANTIGO);
                 novoProgresso = `${PROGRESSO_ANTIGO}${proximaAtividade};`;
             }
 
@@ -30,9 +31,7 @@ export const setProximaAtividade = function(userId, modulo) {
 };
 
 const reload = function(progresso) {
-    const ultimaAtividade = progresso[1].split(';').reverse()[1];
-
-    window.location.replace(`atividade.html#${progresso[0]}&${ultimaAtividade}`);
+    window.location.replace(`atividade.html?${progresso[0]}`);
     window.location.reload();
 };
 
@@ -46,6 +45,16 @@ const getIndiceProximaAtividade = function(progresso) {
 
 export const getProgressoUsuario = function(userId) {
     const USER = DATABASE.ref(`/users/${userId}/progresso`);
+
+    return new Promise(function(resolve) {
+        USER.once('value', function(snapshot) {
+            resolve(snapshot.val());
+        });
+    });
+};
+
+export const getProgressoModuloUsuario = function(userId, modulo) {
+    const USER = DATABASE.ref(`/users/${userId}/progresso/${modulo}`);
 
     return new Promise(function(resolve) {
         USER.once('value', function(snapshot) {
@@ -76,7 +85,7 @@ export const excluirAtividade = function(modulo, chaveAtividade) {
 
     return new Promise(function(resolve) {
         resolve();
-    })
+    });
 };
 
 export const buscaAtividade = function(modulo, chaveAtividade) {

@@ -1,6 +1,6 @@
-import { DATABASE } from '../firebase.js';
-import { feedback } from '../alert.js';
-import { getIdUsuario } from '../firebase-auth.js';
+import {DATABASE} from '../firebase.js';
+import {feedback} from '../alert.js';
+import {getIdUsuario} from '../firebase-auth.js';
 
 export const adicionarModulo = function(modulo) {
     DATABASE.ref(`modulos/${Date.now()}`)
@@ -42,7 +42,7 @@ export const editarModulo = function(chaveModulo, modulo) {
         const PRIVADO = snapshot.val().privado;
         const CRIADOR = snapshot.val().criador;
 
-        getIdUsuario().then(function(uid) {            
+        getIdUsuario().then(function(uid) {
             if (!PRIVADO && uid === CRIADOR) {
                 MODULO.set({
                     nome: modulo.nome,
@@ -54,7 +54,7 @@ export const editarModulo = function(chaveModulo, modulo) {
                     feedback('#add-modulo-error-alert');
                 });
             }
-        })
+        });
     });
 };
 
@@ -64,8 +64,8 @@ export const deletarModulo = function(chaveModulo) {
     MODULO.once('value', function(snapshot) {
         const PRIVADO = snapshot.val().privado;
         const CRIADOR = snapshot.val().criador;
- 
-        getIdUsuario().then(function(uid) {            
+
+        getIdUsuario().then(function(uid) {
             if (!PRIVADO && uid === CRIADOR) {
                 MODULO.remove();
             }

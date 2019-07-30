@@ -1,4 +1,4 @@
-import { alterarSenha, deletar } from './modules/crud/usuario.crud.js';
+import {alterarSenha, deletar} from './modules/crud/usuario.crud.js';
 
 const BTN_ALTERAR = document.querySelector('#alterar');
 const BTN_DELETE = document.querySelector('#delete-accont');

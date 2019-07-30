@@ -1,7 +1,8 @@
-import { mostraAtividade } from './modules/atividade.js';
-import { getIdUsuario } from './modules/firebase-auth.js';
-import { setProximaAtividade } from './modules/crud/atividade.crud.js';
-import { mostraBarraDeProgresso, getAtividadeAtual } from './modules/progresso.js';
+import {mostraAtividade} from './modules/atividade.js';
+import {getIdUsuario} from './modules/firebase-auth.js';
+import {setProximaAtividade} from './modules/crud/atividade.crud.js';
+import {mostraBarraDeProgresso,
+    getAtividadeAtual} from './modules/progresso.js';
 
 const BUTTONS = document.querySelectorAll('.opcao');
 
@@ -17,7 +18,7 @@ for (const BUTTON of BUTTONS) {
         const OPCAO = event.target.textContent;
 
         getAtividadeAtual()
-            .then(function (atividade) {
+            .then(function(atividade) {
                 verificaAcerto(OPCAO, atividade);
             });
     });
@@ -27,8 +28,7 @@ const verificaAcerto = function(opcao, atividade) {
     if (opcao === atividade.resposta) {
         getIdUsuario()
             .then(function(userId) {
-                const HASH = window.location.hash.replace('#', '').split('&');
-                const MODULO = HASH[0];
+                const MODULO = window.location.search.replace('?', '');
 
                 setProximaAtividade(userId, MODULO);
             });
@@ -41,5 +41,4 @@ const loadTagYoutube = function() {
 
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-}
-
+};

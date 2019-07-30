@@ -1,7 +1,7 @@
-import { Atividade } from './class/atividade.class.js';
-import { montarTabelaDeAtividades } from './modules/table.js';
-import { buscarTodasAtividades, excluirAtividade,
-    buscaAtividade, editarAtividade }
+import {Atividade} from './class/atividade.class.js';
+import {montarTabelaDeAtividades} from './modules/table.js';
+import {buscarTodasAtividades, excluirAtividade,
+    buscaAtividade, editarAtividade}
     from './modules/crud/atividade.crud.js';
 
 const T_BODY = document.querySelector('tbody');
@@ -9,14 +9,13 @@ const FORM = document.querySelector('#alterar');
 const BTN_EDIT = document.querySelector('#editar');
 
 document.addEventListener('DOMContentLoaded', function() {
-    const HASH = window.location.hash.replace('#', '').split('&');
-    const MODULO = HASH[0];
+    const MODULO = window.location.search.replace('?', '');
 
     buscarTodasAtividades(MODULO)
         .then(montarTabelaDeAtividades);
 });
 
-BTN_EDIT.addEventListener('click', function() {
+BTN_EDIT.addEventListener('click', function(e) {
     const ATIVIDADE = new Atividade(FORM.url.value.split('=')[1],
         FORM.tempoinicio.value, FORM.tempopause.value,
         FORM.pergunta.value, FORM.resposta.value);
@@ -24,34 +23,30 @@ BTN_EDIT.addEventListener('click', function() {
         FORM.alternativa1.value, FORM.alternativa2.value];
     ATIVIDADE.alternativas = ALTERNATIVAS;
 
-    const HASH = window.location.hash.replace('#', '').split('&');
-    const MODULO = HASH[0];
-    const COD_ATVIDADE = HASH[1];
+    const MODULO = window.location.search.replace('?', '');
+    const COD_ATVIDADE = e.target.parentElement.parentElement.dataset['key'];
 
     editarAtividade(MODULO, COD_ATVIDADE, ATIVIDADE);
 });
 
 T_BODY.addEventListener('click', function(e) {
-    const HASH = window.location.hash.replace('#', '');
-    const MODULO = HASH.split('&')[0];
+    const MODULO = window.location.search.replace('?', '');
     const COD_ATVIDADE = e.target.parentElement.parentElement.dataset['key'];
-    let NOVA_URL = window.location.href(HASH, '');
-    NOVA_URL = NOVA_URL + `#${MODULO}&${COD_ATVIDADE}`;
 
     if (e.target.tagName === 'BUTTON' && e.target.id === 'btn-edit') {
         buscaAtividade(MODULO, COD_ATVIDADE)
             .then((ATIVIDADE) =>
-                mostraAtividade(ATIVIDADE, NOVA_URL)
+                mostraAtividade(ATIVIDADE)
             );
     } else if (e.target.tagName === 'BUTTON' && e.target.id === 'btn-delete') {
         excluirAtividade(MODULO, COD_ATVIDADE)
             .then(() =>
-                window.location.href = NOVA_URL
+                window.location.reload()
             );
     }
 });
 
-const mostraAtividade = function(atividade, nova_url) {
+const mostraAtividade = function(atividade, novaUrl) {
     FORM.url.value = `https://www.youtube.com/watch?v=${atividade.codigo}`,
     FORM.tempoinicio.value = atividade.tempoInicio;
     FORM.tempopause.value = atividade.tempoPause;
@@ -62,6 +57,4 @@ const mostraAtividade = function(atividade, nova_url) {
     for (let i = 0; i < alternativas.length; i++) {
         document.querySelector(`#alternativa${i}`).value = alternativas[i];
     }
-
-    window.location.href = nova_url;
 };

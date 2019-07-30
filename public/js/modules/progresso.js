@@ -1,21 +1,35 @@
-import { Atividade } from '../class/atividade.class.js';
-import { buscarTodasAtividades } from './crud/atividade.crud.js';
+import {Atividade} from '../class/atividade.class.js';
+import {buscarTodasAtividades,
+    getProgressoModuloUsuario} from './crud/atividade.crud.js';
+import {getIdUsuario} from './firebase-auth.js';
 
 export const mostraBarraDeProgresso = function() {
-    const HASH = window.location.hash.replace('#', '').split('&');
-    const MODULO = HASH[0];
-    const ULTIMA_ATIVIDADE = HASH[1];
+    const MODULO = window.location.search.replace('?', '');
+    getIdUsuario()
+        .then(function(userId) {
+            getProgressoModuloUsuario(userId, MODULO)
+                .then(function(progresso) {
+                    let INDICE_ATV_ATUAL = 0;
 
-    buscarTodasAtividades(MODULO)
-        .then(function(TODAS_ATIVIDADES) {
-            const TOTAL_ATIVIDADES = Object.keys(TODAS_ATIVIDADES).length - 3;
+                    if (progresso) {
+                        INDICE_ATV_ATUAL = progresso.split(';').reverse()[1];
+                    }
 
-            atualizaBarraDeProgresso(ULTIMA_ATIVIDADE, TOTAL_ATIVIDADES);
+                    buscarTodasAtividades(MODULO)
+                        .then(function(TODAS_ATIVIDADES) {
+                            const TOTAL_ATIVIDADES =
+                                Object.keys(TODAS_ATIVIDADES).length - 3;
+
+                            atualizaBarraDeProgresso(INDICE_ATV_ATUAL,
+                                TOTAL_ATIVIDADES);
+                        });
+                });
         });
 };
 
 const atualizaBarraDeProgresso = function(progresso, totalAtividades) {
-    const progressoPorcentagem = Math.round((progresso * 100) / totalAtividades);
+    const progressoPorcentagem =
+        Math.round((progresso * 100) / totalAtividades);
     const PROGRESS_BAR = document.querySelector('.progress-bar');
 
     PROGRESS_BAR.setAttribute('style', `width: ${progressoPorcentagem}%`);
@@ -23,28 +37,39 @@ const atualizaBarraDeProgresso = function(progresso, totalAtividades) {
 };
 
 export const getAtividadeAtual = function() {
-    const HASH = window.location.hash.replace('#', '').split('&');
-    const INDICE_ATIVIDADE_ATUAL = HASH[1];
-    const MODULO = HASH[0];
-    let ATIVIDADE;
+    const MODULO = window.location.search.replace('?', '');
 
-    return buscarTodasAtividades(MODULO)
-        .then(function(TODAS_ATIVIDADES) {
-            const CHAVES = Object.keys(TODAS_ATIVIDADES);
-            const MAP = new Map(Object.entries(TODAS_ATIVIDADES));
-            const ATIVIDADE_ATUAL = CHAVES[INDICE_ATIVIDADE_ATUAL];
-            const atividade = MAP.get(ATIVIDADE_ATUAL);
-            ATIVIDADE = montarObjetoAtividade(atividade);
+    return getIdUsuario()
+        .then(function(userId) {
+            getProgressoModuloUsuario(userId, MODULO)
+                .then(function(progresso) {
+                    let INDICE_ATV_ATUAL = 0;
 
-            return new Promise(function(resolve) {
-                resolve(ATIVIDADE);
-            });
+                    if (progresso) {
+                        INDICE_ATV_ATUAL = progresso.split(';').reverse()[1];
+                    }
+
+                    buscarTodasAtividades(MODULO)
+                        .then(function(TODAS_ATIVIDADES) {
+                            const CHAVES = Object.keys(TODAS_ATIVIDADES);
+                            const MAP =
+                                new Map(Object.entries(TODAS_ATIVIDADES));
+                            const ATIVIDADE_ATUAL = CHAVES[INDICE_ATV_ATUAL];
+                            const atividade = MAP.get(ATIVIDADE_ATUAL);
+                            const ATIVIDADE = montarObjetoAtividade(atividade);
+
+                            return new Promise(function(resolve) {
+                                resolve(ATIVIDADE);
+                            });
+                        });
+                });
         });
 };
 
 const montarObjetoAtividade = function(atividade) {
     const ATIVIDADE = new Atividade(atividade.codigo, atividade.tempoInicio,
-        atividade.tempoPause, atividade.modulo, atividade.pergunta, atividade.resposta);
+        atividade.tempoPause, atividade.modulo,
+        atividade.pergunta, atividade.resposta);
     const alternativas = atividade.alternativas;
 
     alternativas.push(atividade.resposta);

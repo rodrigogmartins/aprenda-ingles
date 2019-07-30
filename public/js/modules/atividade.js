@@ -1,4 +1,4 @@
-import { onYouTubeIframeAPIReady } from '../modules/yt-iframe.js';
+import {onYouTubeIframeAPIReady} from '../modules/yt-iframe.js';
 
 export const mostraAtividade = function(ATIVIDADE) {
     montaVideo(ATIVIDADE);

@@ -7,10 +7,18 @@ import {mostraBarraDeProgresso,
 const BUTTONS = document.querySelectorAll('.opcao');
 
 document.addEventListener('DOMContentLoaded', function() {
+    const SPINNER = document.querySelector('.spinner');
+    const CONTEUDO = document.querySelector('#conteudo');
+
     loadTagYoutube();
     mostraBarraDeProgresso();
-    getAtividadeAtual()
-        .then(mostraAtividade);
+    setTimeout(function() {
+        getAtividadeAtual()
+            .then(mostraAtividade);
+    }, 2000);
+
+    SPINNER.style.display = 'none';
+    CONTEUDO.style.display = 'block';
 });
 
 for (const BUTTON of BUTTONS) {

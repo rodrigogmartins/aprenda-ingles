@@ -20,6 +20,9 @@ export const mostraBarraDeProgresso = function() {
                             const TOTAL_ATIVIDADES =
                                 Object.keys(TODAS_ATIVIDADES).length - 3;
 
+                            localStorage.setItem('todasAtividades', JSON.stringify(TODAS_ATIVIDADES));
+                            localStorage.setItem('indiceAtual', INDICE_ATV_ATUAL);
+
                             atualizaBarraDeProgresso(INDICE_ATV_ATUAL,
                                 TOTAL_ATIVIDADES);
                         });
@@ -37,33 +40,18 @@ const atualizaBarraDeProgresso = function(progresso, totalAtividades) {
 };
 
 export const getAtividadeAtual = function() {
-    const MODULO = window.location.search.replace('?', '');
+    const TODAS_ATIVIDADES = JSON.parse(localStorage.getItem('todasAtividades'));
+    const INDICE_ATV_ATUAL = localStorage.getItem('indiceAtual');
+    const CHAVES = Object.keys(TODAS_ATIVIDADES);
+    const MAP =
+        new Map(Object.entries(TODAS_ATIVIDADES));
+    const ATIVIDADE_ATUAL = CHAVES[INDICE_ATV_ATUAL];
+    const atividade = MAP.get(ATIVIDADE_ATUAL);
+    const ATIVIDADE = montarObjetoAtividade(atividade);
 
-    return getIdUsuario()
-        .then(function(userId) {
-            getProgressoModuloUsuario(userId, MODULO)
-                .then(function(progresso) {
-                    let INDICE_ATV_ATUAL = 0;
-
-                    if (progresso) {
-                        INDICE_ATV_ATUAL = progresso.split(';').reverse()[1];
-                    }
-
-                    buscarTodasAtividades(MODULO)
-                        .then(function(TODAS_ATIVIDADES) {
-                            const CHAVES = Object.keys(TODAS_ATIVIDADES);
-                            const MAP =
-                                new Map(Object.entries(TODAS_ATIVIDADES));
-                            const ATIVIDADE_ATUAL = CHAVES[INDICE_ATV_ATUAL];
-                            const atividade = MAP.get(ATIVIDADE_ATUAL);
-                            const ATIVIDADE = montarObjetoAtividade(atividade);
-
-                            return new Promise(function(resolve) {
-                                resolve(ATIVIDADE);
-                            });
-                        });
-                });
-        });
+    return new Promise(function(resolve) {
+        resolve(ATIVIDADE);
+    });
 };
 
 const montarObjetoAtividade = function(atividade) {

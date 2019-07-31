@@ -7,9 +7,14 @@ import {buscarTodasAtividades, excluirAtividade,
 const T_BODY = document.querySelector('tbody');
 const FORM = document.querySelector('#alterar');
 const BTN_EDIT = document.querySelector('#editar');
+const MENU_ATV = document.querySelector('#menu-atv');
+const MENU_ADD_ATV = document.querySelector('#menu-add-atv');
 
 document.addEventListener('DOMContentLoaded', function() {
     const MODULO = window.location.search.replace('?', '');
+
+    MENU_ATV.setAttribute('href', `./../atividade.html${MODULO}`);
+    MENU_ADD_ATV.setAttribute('href', `./../adicionaratividade.html${MODULO}`);
 
     buscarTodasAtividades(MODULO)
         .then(montarTabelaDeAtividades);

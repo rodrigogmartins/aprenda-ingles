@@ -2,9 +2,18 @@ import {Atividade} from './class/atividade.class.js';
 import {adicionarAtividade} from './modules/crud/atividade.crud.js';
 
 const FORM = document.querySelector('#add-atividade');
-const MAX_ATIVIDADES = 3;
+const MAX_ALTERNATIVAS = 3;
 let atividade = null;
 let numeroDeAlternativasAdicionadas = 0;
+const MENU_ATV = document.querySelector('#menu-add-atv');
+const MENU_GER_ATV = document.querySelector('#menu-ger-atv');
+
+document.addEventListener('DOMContentLoaded', function() {
+    const MODULO = window.location.search;
+
+    MENU_ATV.setAttribute('href', `./../atividade.html${MODULO}`);
+    MENU_GER_ATV.setAttribute('href', `./../gerenciaratividade.html${MODULO}`);
+});
 
 FORM.adicionaratividade.addEventListener('click', function(e) {
     atividade = new Atividade(FORM.url.value.split('=')[1],
@@ -16,7 +25,7 @@ FORM.adicionaratividade.addEventListener('click', function(e) {
 
 FORM.adicionaropcao.addEventListener('click', function(e) {
     numeroDeAlternativasAdicionadas++;
-    if (numeroDeAlternativasAdicionadas === MAX_ATIVIDADES) {
+    if (numeroDeAlternativasAdicionadas === MAX_ALTERNATIVAS) {
         FORM.adicionaropcao.setAttribute('disabled', true);
     }
     atividade.addOption = FORM.alternativa.value;
@@ -44,7 +53,8 @@ const adicionarElementosTabela = function(numeroRow, valor) {
 };
 
 FORM.concluir.addEventListener('click', function(e) {
-    adicionarAtividade(atividade);
+    const MODULO = window.location.search.replace('?', '');
+    adicionarAtividade(MODULO, atividade);
     limparFormulario();
     e.preventDefault();
 });

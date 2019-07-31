@@ -5,10 +5,16 @@ import {mostraBarraDeProgresso,
     getAtividadeAtual} from './modules/progresso.js';
 
 const BUTTONS = document.querySelectorAll('.opcao');
+const SPINNER = document.querySelector('.spinner');
+const CONTEUDO = document.querySelector('#conteudo');
+const MENU_ADD_ATV = document.querySelector('#menu-add-atv');
+const MENU_GER_ATV = document.querySelector('#menu-ger-atv');
 
 document.addEventListener('DOMContentLoaded', function() {
-    const SPINNER = document.querySelector('.spinner');
-    const CONTEUDO = document.querySelector('#conteudo');
+    const MODULO = window.location.search;
+
+    MENU_ADD_ATV.setAttribute('href', `./../adicionaratividade.html${MODULO}`);
+    MENU_GER_ATV.setAttribute('href', `./../gerenciaratividade.html${MODULO}`);
 
     loadTagYoutube();
     mostraBarraDeProgresso();

@@ -20,8 +20,10 @@ export const mostraBarraDeProgresso = function() {
                             const TOTAL_ATIVIDADES =
                                 Object.keys(TODAS_ATIVIDADES).length - 3;
 
-                            localStorage.setItem('todasAtividades', JSON.stringify(TODAS_ATIVIDADES));
-                            localStorage.setItem('indiceAtual', INDICE_ATV_ATUAL);
+                            localStorage.setItem('todasAtividades',
+                                JSON.stringify(TODAS_ATIVIDADES));
+                            localStorage.setItem('indiceAtual',
+                                INDICE_ATV_ATUAL);
 
                             atualizaBarraDeProgresso(INDICE_ATV_ATUAL,
                                 TOTAL_ATIVIDADES);
@@ -40,7 +42,8 @@ const atualizaBarraDeProgresso = function(progresso, totalAtividades) {
 };
 
 export const getAtividadeAtual = function() {
-    const TODAS_ATIVIDADES = JSON.parse(localStorage.getItem('todasAtividades'));
+    const TODAS_ATIVIDADES =
+        JSON.parse(localStorage.getItem('todasAtividades'));
     const INDICE_ATV_ATUAL = localStorage.getItem('indiceAtual');
     const CHAVES = Object.keys(TODAS_ATIVIDADES);
     const MAP =

@@ -5,7 +5,6 @@ export const montarTabelaDeModulos = function(OBJECT, userId) {
 
     for (let i = 0; i < CHAVES.length; i++) {
         const MODULO = MAP.get(CHAVES[i]);
-
         if (!MODULO.privado || MODULO.criador === userId) {
             const TH_COD = criarLinhaTabela(CHAVES[i]);
             const TH_PERGUNTA = criarLinhaTabela(MODULO.nome);
@@ -36,7 +35,7 @@ export const montarTabelaDeAtividades = function(OBJECT) {
     const CHAVES = Object.keys(OBJECT);
     const TBODY = document.querySelector('#tbody');
 
-    for (let i = 0; i < CHAVES.length; i++) {
+    for (let i = 0; i < CHAVES.length - 3; i++) {
         const ATIVIDADE = MAP.get(CHAVES[i]);
         const TH_COD = criarLinhaTabela(CHAVES[i]);
         const TH_PERGUNTA = criarLinhaTabela(ATIVIDADE.pergunta);

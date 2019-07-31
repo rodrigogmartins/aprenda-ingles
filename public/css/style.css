@@ -20,3 +20,44 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+
+.tamanho-menu {
+	padding: 10px 10px;
+	width: 30vw;
+}
+
+@media only screen and (min-width: 1000px) {
+    .tamanho-menu {
+        width: 400px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .tamanho-menu {
+        width: 70vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .tamanho-menu {
+        width: 50vw;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .tamanho-menu {
+        width: 40vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .tamanho-menu {
+        width: 30vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .tamanho-menu {
+        width: 30vw;
+    }
+}

@@ -33,12 +33,12 @@ for (const BUTTON of BUTTONS) {
 
         getAtividadeAtual()
             .then(function(atividade) {
-                verificaAcerto(OPCAO, atividade);
+                verificaAcertoVideo(OPCAO, atividade);
             });
     });
 }
 
-const verificaAcerto = function(opcao, atividade) {
+const verificaAcertoVideo = function(opcao, atividade) {
     if (opcao === atividade.resposta) {
         getIdUsuario()
             .then(function(userId) {
@@ -46,6 +46,8 @@ const verificaAcerto = function(opcao, atividade) {
 
                 setProximaAtividade(userId, MODULO);
             });
+    } else {
+        window.location.reload();
     }
 };
 

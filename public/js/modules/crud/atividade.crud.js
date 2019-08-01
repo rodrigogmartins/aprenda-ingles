@@ -63,7 +63,7 @@ export const getProgressoModuloUsuario = function(userId, modulo) {
     });
 };
 
-export const adicionarAtividade = function(modulo, atividade) {
+export const adicionarAtividadeVideo = function(modulo, atividade) {
     DATABASE.ref(`modulos/${modulo}/${Date.now()}`)
         .set({
             codigo: atividade.codigo,
@@ -71,13 +71,31 @@ export const adicionarAtividade = function(modulo, atividade) {
             tempoPause: atividade.tempoPause,
             pergunta: atividade.pergunta,
             resposta: atividade.resposta,
-            alternativas: atividade.alternativas
-        }).then(function() {
+            alternativas: atividade.alternativas,
+            tipo: atividade.tipo
+        })
+        .then(function() {
             feedback('#add-atividade-succsess-alert');
         }).catch(function() {
             feedback('#add-atividade-error-alert');
         });
 };
+
+export const adicionarAtividadeTraducaoParcial = function(modulo, atividade) {
+    DATABASE.ref(`modulos/${modulo}/${Date.now()}`)
+        .set({
+            texto: atividade.texto,
+            resposta: atividade.resposta,
+            alternativas: atividade.alternativas,
+            tipo: atividade.tipo
+        })
+        .then(function() {
+            feedback('#add-atividade-succsess-alert');
+        }).catch(function() {
+            feedback('#add-atividade-error-alert');
+        });
+};
+
 
 export const excluirAtividade = function(modulo, chaveAtividade) {
     const ATIVIDADE = DATABASE.ref(`modulos/${modulo}/${chaveAtividade}`);

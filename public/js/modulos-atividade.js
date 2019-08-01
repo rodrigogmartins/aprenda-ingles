@@ -30,3 +30,22 @@ const buildCardModuloAtividade = function(MODULOS) {
         resolve();
     });
 };
+
+const INPUT_SEARCH = document.querySelector('#nome-modulo');
+
+INPUT_SEARCH.addEventListener('keydown', filtrar);
+
+const filtrar = function() {
+    const MODULOS = document.querySelectorAll('.modulo');
+    const PALAVRA = INPUT_SEARCH.value.trim();
+
+    for (const MODULO of MODULOS) {
+        if (PALAVRA) {
+            if (MODULO.indexOf(PALAVRA) === -1) {
+                MODULO.style.display = 'none';
+            }
+        } else {
+            MODULO.style.display = 'block';
+        }
+    }
+}

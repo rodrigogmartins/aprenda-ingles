@@ -1,9 +1,14 @@
 import {onYouTubeIframeAPIReady} from '../modules/yt-iframe.js';
 
 export const mostraAtividade = function(ATIVIDADE) {
-    montaVideo(ATIVIDADE);
-    mostraPergunta(ATIVIDADE.pergunta);
-    montaOpcoesAtividade(ATIVIDADE);
+    if (ATIVIDADE.tipo === 'video') {
+        montaVideo(ATIVIDADE);
+        mostraPergunta(ATIVIDADE.pergunta);
+        montaOpcoesAtividade(ATIVIDADE);
+    } else if (ATIVIDADE.tipo === 'traducao-parcial') {
+        mostraPergunta(ATIVIDADE.texto);
+        montaOpcoesAtividade(ATIVIDADE);
+    }
 };
 
 const montaVideo = function(ATIVIDADE) {
@@ -41,25 +46,20 @@ const montaOpcoesAtividade = function(ATIVIDADE) {
 };
 
 const mostrarAlternativas = function(alternativas) {
-    const BUTTONS_OPCOES = document.querySelectorAll('.opcao');
-    const botoesSorteados = [];
+    const BUTTONS = document.querySelector('#botoes');
     const opcoesSorteadas = [];
+    while (opcoesSorteadas.length < alternativas.length) {
+        let sorteioOpcao = Math.round(Math.random() * (alternativas.length - 1));
 
-    while (botoesSorteados.length < 4 && opcoesSorteadas.length < 4) {
-        let sorteioBotao = Math.round(Math.random() * 3);
-        let sorteioOpcao = Math.round(Math.random() * 3);
+        if (elementoNaoSorteado(opcoesSorteadas, sorteioOpcao)) {
+            const BUTTON = document.createElement('button');
+            BUTTON.setAttribute('class', 'btn btn-lg btn-block btn-primary opcao col-12 col-lg-4 col-xl-4"');
+            BUTTON.textContent = alternativas[sorteioOpcao];
+            BUTTONS.appendChild(BUTTON);
 
-        if (elementoNaoSorteado(botoesSorteados, sorteioBotao)) {
-            if (elementoNaoSorteado(opcoesSorteadas, sorteioOpcao)) {
-                BUTTONS_OPCOES[sorteioBotao].textContent =
-                    alternativas[sorteioOpcao];
-                botoesSorteados.push(sorteioBotao);
-                opcoesSorteadas.push(sorteioOpcao);
-            } else {
-                sorteioOpcao = Math.round(Math.random() * 3);
-            }
+            opcoesSorteadas.push(sorteioOpcao);
         } else {
-            sorteioBotao = Math.round(Math.random() * 3);
+            sorteioOpcao = Math.round(Math.random() * alternativas.length - 1);
         }
     }
 };

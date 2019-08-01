@@ -26,3 +26,9 @@ table {
 .block {
     width: 100%;
 }
+
+#formularios {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

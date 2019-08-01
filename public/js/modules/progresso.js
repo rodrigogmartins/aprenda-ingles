@@ -1,4 +1,3 @@
-import {Atividade} from '../class/atividade.class.js';
 import {buscarTodasAtividades,
     getProgressoModuloUsuario} from './crud/atividade.crud.js';
 import {getIdUsuario} from './firebase-auth.js';
@@ -58,11 +57,8 @@ export const getAtividadeAtual = function() {
 };
 
 const montarObjetoAtividade = function(atividade) {
-    const ATIVIDADE = new Atividade(atividade.codigo, atividade.tempoInicio,
-        atividade.tempoPause, atividade.modulo,
-        atividade.pergunta, atividade.resposta);
+    const ATIVIDADE = atividade;
     const alternativas = atividade.alternativas;
-
     alternativas.push(atividade.resposta);
     ATIVIDADE.alternativas = alternativas;
 

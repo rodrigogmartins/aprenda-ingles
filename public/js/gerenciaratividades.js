@@ -1,4 +1,4 @@
-import {Atividade} from './class/atividade.class.js';
+import { AtividadeVideo } from './class/atividadevideo.class.js';
 import {montarTabelaDeAtividades} from './modules/table.js';
 import {buscarTodasAtividades, excluirAtividade,
     buscaAtividade, editarAtividade}
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 BTN_EDIT.addEventListener('click', function(e) {
-    const ATIVIDADE = new Atividade(FORM.url.value.split('=')[1],
+    const ATIVIDADE = new AtividadeVideo(FORM.url.value.split('=')[1],
         FORM.tempoinicio.value, FORM.tempopause.value,
         FORM.pergunta.value, FORM.resposta.value);
     const ALTERNATIVAS = [FORM.alternativa0.value,

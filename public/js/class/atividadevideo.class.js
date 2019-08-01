@@ -1,11 +1,11 @@
-export class Atividade {
-    constructor(codigo, tempoInicio, tempoPause, modulo, pergunta, resposta) {
+export class AtividadeVideo {
+    constructor(codigo, tempoInicio, tempoPause, pergunta, resposta, tipo) {
         this._codigo = codigo;
         this._tempoInicio = tempoInicio;
         this._tempoPause = tempoPause;
-        this._modulo = modulo;
         this._pergunta = pergunta;
         this._resposta = resposta;
+        this._tipo = tipo;
         this._alternativas = [];
     }
 
@@ -31,10 +31,6 @@ export class Atividade {
         return this._tempoPause;
     }
 
-    get modulo() {
-        return this._modulo;
-    }
-
     get pergunta() {
         return this._pergunta;
     }
@@ -45,5 +41,9 @@ export class Atividade {
 
     get alternativas() {
         return this._alternativas;
+    }
+
+    get tipo() {
+        return this._tipo;
     }
 }

@@ -7,9 +7,9 @@ export const montarTabelaDeModulos = function(OBJECT, userId) {
         const MODULO = MAP.get(CHAVES[i]);
         if (!MODULO.privado || MODULO.criador === userId) {
             const TH_COD = criarLinhaTabela(CHAVES[i]);
-            const TH_PERGUNTA = criarLinhaTabela(MODULO.nome);
             const TH_EDIT = document.createElement('th');
             const TH_DELETE = document.createElement('th');
+            const TH_PERGUNTA = criarLinhaTabela(MODULO.nome);
             const TR = document.createElement('tr');
             const BTN_EDIT = criarBotaoEdit('#modalEditarModulo');
             const BTN_DELETE = criarBotaoDelete();
@@ -38,11 +38,13 @@ export const montarTabelaDeAtividades = function(OBJECT) {
     for (let i = 0; i < CHAVES.length - 3; i++) {
         const ATIVIDADE = MAP.get(CHAVES[i]);
         const TH_COD = criarLinhaTabela(CHAVES[i]);
-        const TH_PERGUNTA = criarLinhaTabela(ATIVIDADE.pergunta);
+        const TH_PERGUNTA = (ATIVIDADE.tipo === 'video')
+            ? criarLinhaTabela(ATIVIDADE.pergunta)
+            : criarLinhaTabela(ATIVIDADE.texto);
         const TH_EDIT = document.createElement('th');
         const TH_DELETE = document.createElement('th');
         const TR = document.createElement('tr');
-        const BTN_EDIT = criarBotaoEdit('#modalEditarAtividade');
+        const BTN_EDIT = criarBotaoEdit(`#${ATIVIDADE.tipo}ModalEditar`);
         const BTN_DELETE = criarBotaoDelete();
 
         TH_DELETE.appendChild(BTN_DELETE);

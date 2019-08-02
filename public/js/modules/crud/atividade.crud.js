@@ -104,7 +104,6 @@ export const adicionarAtividadeTraducaoParcial = function(modulo, atividade) {
         });
 };
 
-
 export const excluirAtividade = function(modulo, chaveAtividade) {
     const ATIVIDADE = DATABASE.ref(`modulos/${modulo}/${chaveAtividade}`);
     ATIVIDADE.remove();
@@ -134,17 +133,32 @@ export const buscarTodasAtividades = function(modulo) {
     });
 };
 
-export const editarAtividade = function(modulo, chaveAtividade, atividade) {
-    DATABASE.ref(`modulos/${modulo}/${chaveAtividade}`).set({
-        codigo: atividade.codigo,
-        tempoInicio: atividade.tempoInicio,
-        tempoPause: atividade.tempoPause,
-        pergunta: atividade.pergunta,
-        resposta: atividade.resposta,
-        alternativas: atividade.alternativas
-    }).then(function() {
-        feedback('#edit-atividade-succsess-alert');
-    }).catch(function() {
-        feedback('#edit-atividade-error-alert');
-    });
+export const editarAtividadeVideo = function(modulo, chaveAtividade, atividade) {
+    DATABASE.ref(`modulos/${modulo}/${chaveAtividade}`)
+        .set({
+            codigo: atividade.codigo,
+            tempoInicio: atividade.tempoInicio,
+            tempoPause: atividade.tempoPause,
+            pergunta: atividade.pergunta,
+            resposta: atividade.resposta,
+            alternativas: atividade.alternativas
+        }).then(function() {
+            feedback('#edit-atividade-video-succsess-alert');
+        }).catch(function() {
+            feedback('#edit-atividade-video-error-alert');
+        });
+};
+
+export const editarAtividadeTraducaoParcial = function(modulo, chaveAtividade, atividade) {
+    DATABASE.ref(`modulos/${modulo}/${chaveAtividade}`)
+        .set({
+            texto: atividade.texto,
+            resposta: atividade.resposta,
+            alternativas: atividade.alternativas,
+            tipo: atividade.tipo
+        }).then(function() {
+            feedback('#edit-atividade-trad-parc-succsess-alert');
+        }).catch(function() {
+            feedback('#edit-atividade-trad-parc-error-alert');
+        });
 };

@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modalEditarAtividade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="videoModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -72,8 +72,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-danger alert-dismissible fade show col-12 col-lg-6 col-xl-6 offset-lg-3 offset-xl-3" id="edit-atividade-error-alert" role="alert">
-                            <strong> ERRO AO ADICIONAR ATIVIDADE! </strong>
+                        <div class="alert alert-danger alert-dismissible fade show col-12 col-lg-12 col-xl-12" id="edit-atividade-video-error-alert" role="alert">
+                            <strong> ERRO AO ALTERAR ATIVIDADE! </strong>
                             <br>
                             <span>
                                     Verifique se todos os campos foram preenchidos corretamente e tente novamente.
@@ -82,43 +82,112 @@
                                 <span aria-hidden="true"> &times; </span>
                             </button>
                         </div>
-                        <div class="alert alert-success alert-dismissible fade show col-12 col-lg-6 col-xl-6 offset-lg-3 offset-xl-3" id="edit-atividade-succsess-alert" role="alert">
-                            <strong> SUCESSO AO ADICIONAR ATIVIDADE! </strong>
+                        <div class="alert alert-success alert-dismissible fade show col-12 col-lg-12 col-xl-12" id="edit-atividade-video-succsess-alert" role="alert">
+                            <strong> SUCESSO AO ALTERAR ATIVIDADE! </strong>
                             <button type="button" class="close fechar" aria-label="Close">
                                 <span aria-hidden="true"> &times; </span>
                             </button>
                         </div>
-                        <form action="#" id="alterar">
+                        <form action="#" id="ger-atividade-video">
                             <div class="input-group input-group-lg">
-                                <input type="text" name="url" class="form-control" id="url" required>
+                                <input type="text" name="url" class="form-control" id="url" placeholder="Url" required>
                             </div>
                             <div class="input-group input-group-lg">
-                                <input type="text" name="tempoinicio" class="form-control" id="tempo-inicio" required>
+                                <input type="text" name="tempoinicio" class="form-control" id="tempo-inicio" placeholder="Tempo Inicio" required>
                             </div>
                             <div class="input-group input-group-lg">
-                                <input type="text" name="tempopause" class="form-control" id="tempo-pause" required>
+                                <input type="text" name="tempopause" class="form-control" id="tempo-pause" placeholder="Tempo Pause" required>
                             </div>
                             <div class="input-group input-group-lg">
-                                <input type="text" name="pergunta" class="form-control" id="pergunta" required>
+                                <input type="text" name="pergunta" class="form-control" id="pergunta" placeholder="Pergunta" required>
                             </div>
                             <div class="input-group input-group-lg">
-                                <input type="text" name="resposta" class="form-control" id="resposta" required>
+                                <input type="text" name="resposta" class="form-control" id="resposta" placeholder="Resposta" required>
                             </div>
                             <div class="input-group input-group-lg">
-                                <input type="text" name="alternativa0" class="form-control" id="alternativa0" required>
+                                <input type="text" name="alternativa0" class="form-control" id="alternativa-video0" placeholder="Alternativa 1" required>
                             </div>
                             <div class="input-group input-group-lg">
-                                <input type="text" name="alternativa1" class="form-control" id="alternativa1" required>
+                                <input type="text" name="alternativa1" class="form-control" id="alternativa-video1" placeholder="Alternativa 2" required>
                             </div>
                             <div class="input-group input-group-lg">
-                                <input type="text" name="alternativa2" class="form-control" id="alternativa2" required>
+                                <input type="text" name="alternativa2" class="form-control" id="alternativa-video2" placeholder="Alternativa 3" required>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <div>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
-                            <button type="button" class="btn btn-primary" id="editar"> Alterar </button>
+                            <button type="button" class="btn btn-primary" id="editar-atividade-video"> Alterar </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="traducao-parcialModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Alterar Atividade </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible fade show col-12 col-lg-12 col-xl-12" id="edit-atividade-trad-parc-error-alert" role="alert">
+                            <strong> ERRO AO ALTERAR ATIVIDADE! </strong>
+                            <br>
+                            <span>
+                                    Verifique se todos os campos foram preenchidos corretamente e tente novamente.
+                            </span>
+                            <button type="button" class="close fechar" aria-label="Close">
+                                <span aria-hidden="true"> &times; </span>
+                            </button>
+                        </div>
+                        <div class="alert alert-success alert-dismissible fade show col-12 col-lg-12 col-xl-12" id="edit-atividade-trad-parc-succsess-alert" role="alert">
+                            <strong> SUCESSO AO ALTERAR ATIVIDADE! </strong>
+                            <button type="button" class="close fechar" aria-label="Close">
+                                <span aria-hidden="true"> &times; </span>
+                            </button>
+                        </div>
+                        <form action="#" id="ger-atividade-trad-parc">
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="texto" class="form-control" id="url" placeholder="Texto" required>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="traducao" class="form-control" id="tempo-inicio" placeholder="Tradução" required>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="alternativa" class="form-control" id="alternativa-trad-parc0" placeholder="Alternativa 1" required>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="alternativa" class="form-control" id="alternativa-trad-parc1" placeholder="Alternativa 2" required>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="alternativa" class="form-control" id="alternativa-trad-parc2" placeholder="Alternativa 3" required>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="alternativa" class="form-control" id="alternativa-trad-parc3" placeholder="Alternativa 4" required>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="alternativa" class="form-control" id="alternativa-trad-parc4" placeholder="Alternativa 5" required>
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="alternativa" class="form-control" id="alternativa-trad-parc5" placeholder="Alternativa 6">
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="alternativa" class="form-control" id="alternativa-trad-parc6" placeholder="Alternativa 7">
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <input type="text" name="alternativa" class="form-control" id="alternativa-trad-parc7" placeholder="Alternativa 8">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sair </button>
+                            <button type="button" class="btn btn-primary" id="editar-atividade-trad-parc"> Alterar </button>
                         </div>
                     </div>
                 </div>

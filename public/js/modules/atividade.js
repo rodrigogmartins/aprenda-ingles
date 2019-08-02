@@ -6,6 +6,12 @@ export const mostraAtividade = function(ATIVIDADE) {
         mostraPergunta(ATIVIDADE.pergunta);
         montaOpcoesAtividade(ATIVIDADE);
     } else if (ATIVIDADE.tipo === 'traducao-parcial') {
+        const DIV_PLAYER = document.querySelector('#player');
+        DIV_PLAYER.style.height = 'auto';
+        DIV_PLAYER.style.backgroundColor = 'rgba(0, 0, 0, .3)';
+        DIV_PLAYER.style.marginBottom = '2em';
+        DIV_PLAYER.style.paddingBottom = '1em';
+        DIV_PLAYER.style.paddingTop = '1em';
         mostraPergunta(ATIVIDADE.texto);
         montaOpcoesAtividade(ATIVIDADE);
     }

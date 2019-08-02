@@ -7,6 +7,7 @@ export const setProximaAtividade = function(userId, modulo) {
         .then(function(progresso) {
             const MAP = new Map(Object.entries(progresso));
             const PROGRESSO_ANTIGO = MAP.get(mdl);
+            const TODAS_ATIVIDADES = JSON.parse(localStorage.getItem('todasAtividades'));
             let novoProgresso = '0;';
 
             if (PROGRESSO_ANTIGO !== undefined) {
@@ -22,7 +23,7 @@ export const setProximaAtividade = function(userId, modulo) {
         .then(function(progresso) {
             const OBJETO = JSON.parse(`{"${progresso[0]}":"${progresso[1]}"}`);
 
-            DATABASE.ref(`/users/${userId}/progresso`).set(OBJETO);
+            DATABASE.ref(`/users/${userId}/progresso`).update(OBJETO);
 
             return new Promise(function(resolve) {
                 resolve(progresso);
@@ -36,11 +37,18 @@ const reload = function(progresso) {
 };
 
 const getIndiceProximaAtividade = function(progresso) {
+    const TODAS_ATIVIDADES = JSON.parse(localStorage.getItem('todasAtividades'));
+    const TOTAL_ATIVIDADES = Object.keys(TODAS_ATIVIDADES).length - 3;
     const indicesProgresso = progresso.split(';');
     let ultimaAtividade = indicesProgresso[indicesProgresso.length-2];
     ultimaAtividade = parseInt(ultimaAtividade);
 
-    return (ultimaAtividade + 1) + '';
+    if (TOTAL_ATIVIDADES === ultimaAtividade) {
+        return (ultimaAtividade + 1) + '';
+    } else {
+        return '0';
+    }
+
 };
 
 export const getProgressoUsuario = function(userId) {

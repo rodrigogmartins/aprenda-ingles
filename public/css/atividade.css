@@ -95,7 +95,6 @@ body {
     overflow: hidden;
     padding-left: 0px;
     padding-right: 0px;
-
 }
 
 #progresso {
@@ -114,4 +113,20 @@ ul {
     height: 50vh;
     margin-bottom: 1em;
     border: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#player button {
+    margin: .25em;
+    max-width: 510px;
+    overflow: hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.selecionada {
+    height: 48px;
 }

@@ -4,11 +4,11 @@ import {setProximaAtividade} from './modules/crud/atividade.crud.js';
 import {mostraBarraDeProgresso,
     getAtividadeAtual} from './modules/progresso.js';
 
-const BUTTONS = document.querySelectorAll('.opcao');
 const SPINNER = document.querySelector('.spinner');
 const CONTEUDO = document.querySelector('#conteudo');
 const MENU_ADD_ATV = document.querySelector('#menu-add-atv');
 const MENU_GER_ATV = document.querySelector('#menu-ger-atv');
+const DIV_PLAYER = document.querySelector('#player');
 
 document.addEventListener('DOMContentLoaded', function() {
     const MODULO = window.location.search;
@@ -23,20 +23,55 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(mostraAtividade);
     }, 2000);
 
+    setTimeout(function() {
+        const BUTTONS = document.querySelectorAll('.opcao');
+
+        for (const BUTTON of BUTTONS) {
+            BUTTON.addEventListener('click', function(event) {
+                const OPCAO = event.target.textContent.trim();
+
+                getAtividadeAtual()
+                    .then(function(atividade) {
+                        if (atividade.tipo === 'video') {
+                            verificaAcertoVideo(OPCAO, atividade);
+                        } else if (atividade.tipo === 'traducao-parcial') {
+                            verificaAcertoTradParc(OPCAO, atividade);
+                        }
+                    });
+            });
+        }
+    }, 2000);
+
     SPINNER.style.display = 'none';
     CONTEUDO.style.display = 'block';
 });
 
-for (const BUTTON of BUTTONS) {
-    BUTTON.addEventListener('click', function(event) {
-        const OPCAO = event.target.textContent;
+const verificaAcertoTradParc = function(opcao, atividade) {
+    const BUTTON = document.createElement('button');
+    BUTTON.setAttribute('class', 'btn btn-lg btn-block btn-primary opcao selecionada col-12 col-lg-4 col-xl-4"');
+    BUTTON.textContent = opcao;
+    DIV_PLAYER.appendChild(BUTTON);
 
-        getAtividadeAtual()
-            .then(function(atividade) {
-                verificaAcertoVideo(OPCAO, atividade);
+    const SELECIONADAS = document.querySelectorAll('.selecionada');
+    let fraseFormada = '';
+
+    for (const SELECIONADA of SELECIONADAS) {
+        fraseFormada += (SELECIONADA.textContent.trim() + ' ');
+
+        SELECIONADA.addEventListener('click', function(event) {
+            event.target.remove();
+        });
+    }
+
+    if (fraseFormada.trim().toLowerCase() === atividade.resposta.toLowerCase()) {
+        getIdUsuario()
+            .then(function(userId) {
+                const MODULO = window.location.search.replace('?', '');
+
+                setProximaAtividade(userId, MODULO);
             });
-    });
-}
+    }
+};
 
 const verificaAcertoVideo = function(opcao, atividade) {
     if (opcao === atividade.resposta) {

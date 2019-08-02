@@ -58,9 +58,12 @@ export const getAtividadeAtual = function() {
 
 const montarObjetoAtividade = function(atividade) {
     const ATIVIDADE = atividade;
-    const alternativas = atividade.alternativas;
-    alternativas.push(atividade.resposta);
-    ATIVIDADE.alternativas = alternativas;
+
+    if (atividade.tipo === 'video') {
+        const alternativas = atividade.alternativas;
+        alternativas.push(atividade.resposta);
+        ATIVIDADE.alternativas = alternativas;
+    }
 
     return ATIVIDADE;
 };

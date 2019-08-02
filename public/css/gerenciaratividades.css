@@ -68,3 +68,13 @@ table {
         max-width: 120px;
     }
 }
+
+#adicionar-modulo {
+    margin-top: 1em;
+}
+
+#titulo-modal {
+    color: black;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}

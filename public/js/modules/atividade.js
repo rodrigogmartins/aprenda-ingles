@@ -2,8 +2,10 @@ import {onYouTubeIframeAPIReady} from '../modules/yt-iframe.js';
 
 export const mostraAtividade = function(ATIVIDADE) {
     if (ATIVIDADE.tipo === 'video') {
+        const DIV_PLAYER = document.querySelector('#player');
+        DIV_PLAYER.style.height = '50vh';
         montaVideo(ATIVIDADE);
-        mostraPergunta(ATIVIDADE.pergunta);
+        mostraTextoAtividade(ATIVIDADE.pergunta);
         montaOpcoesAtividade(ATIVIDADE);
     } else if (ATIVIDADE.tipo === 'traducao-parcial') {
         const DIV_PLAYER = document.querySelector('#player');
@@ -12,10 +14,35 @@ export const mostraAtividade = function(ATIVIDADE) {
         DIV_PLAYER.style.marginBottom = '2em';
         DIV_PLAYER.style.paddingBottom = '1em';
         DIV_PLAYER.style.paddingTop = '1em';
-        mostraPergunta(ATIVIDADE.texto);
+        mostraTextoAtividade(ATIVIDADE.texto);
         montaOpcoesAtividade(ATIVIDADE);
+    } else if (ATIVIDADE.tipo === 'traducao') {
+        const DIV_PLAYER = document.querySelector('#player');
+        DIV_PLAYER.style.height = 'auto';
+        const DIV_BOTOES = document.querySelector('#botoes');
+        const DIV = montaDivTraducao();
+        DIV_BOTOES.appendChild(DIV);
+        mostraTextoAtividade(ATIVIDADE.texto);
     }
 };
+
+const montaDivTraducao = function() {
+    const DIV = document.createElement('div');
+    DIV.setAttribute('class', 'col-12 col-lg-12 col-xl-12');
+    const TEXTAREA = document.createElement('textarea');
+    TEXTAREA.setAttribute('class', 'col-12 col-lg-12 col-xl-12');
+    TEXTAREA.setAttribute('name', 'textarea');
+    TEXTAREA.setAttribute('placeholder', 'Traduza o texto a cima');
+    TEXTAREA.setAttribute('id', 'resposta');
+    const BUTTON = document.createElement('button');
+    BUTTON.setAttribute('class', 'btn btn-lg opcao btn-block btn-primary');
+    BUTTON.setAttribute('name', 'submit');
+    BUTTON.textContent = 'Verificar';
+
+    DIV.appendChild(TEXTAREA);
+    DIV.appendChild(BUTTON);
+    return DIV;
+}
 
 const montaVideo = function(ATIVIDADE) {
     const TEMPO_INICIO = tempoEmSegundos(ATIVIDADE.tempoInicio);
@@ -39,10 +66,10 @@ const tempoEmSegundos = function(tempo) {
     return segundos;
 };
 
-const mostraPergunta = function(pergunta) {
-    const CAMPO_PERGUNTA = document.querySelector('#titulo');
+const mostraTextoAtividade = function(texto) {
+    const CAMPO_TEXTO = document.querySelector('#titulo');
 
-    CAMPO_PERGUNTA.textContent = pergunta;
+    CAMPO_TEXTO.textContent = texto;
 };
 
 const montaOpcoesAtividade = function(ATIVIDADE) {

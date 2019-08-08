@@ -8,7 +8,7 @@ FORM.adicionarmodulo.addEventListener('click', function(e) {
     getIdUsuario()
         .then(function(criador) {
             const MODULO =
-                new Modulo(FORM.nome.value, FORM.privado.value, criador);
+                new Modulo(FORM.nome.value, FORM.privado.checked, criador);
 
             adicionarModulo(MODULO);
             limparFormulario();

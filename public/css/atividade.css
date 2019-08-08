@@ -110,7 +110,6 @@ ul {
 }
 
 #player {
-    height: 50vh;
     margin-bottom: 1em;
     border: none;
     display: flex;
@@ -129,4 +128,17 @@ ul {
 
 .selecionada {
     height: 48px;
+}
+
+textarea {
+    border-radius: 5px;
+    height: 20vh;
+    padding: .5em;
+    resize: none;
+    margin-top: 2em;
+}
+
+#form-atv button {
+    margin: 0;
+    max-width: 800px;
 }

@@ -3,6 +3,7 @@ import {feedback} from '../alert.js';
 import {getIdUsuario} from '../firebase-auth.js';
 
 export const adicionarModulo = function(modulo) {
+    console.log(modulo);
     DATABASE.ref(`modulos/${Date.now()}`)
         .set({
             nome: modulo.nome,

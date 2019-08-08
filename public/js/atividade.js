@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             verificaAcertoVideo(OPCAO, atividade);
                         } else if (atividade.tipo === 'traducao-parcial') {
                             verificaAcertoTradParc(OPCAO, atividade);
+                        } else if (atividade.tipo === 'traducao') {
+                            const textoRespostaUsuario = document.querySelector('#resposta').value;
+
+                            verificaAcertoTrad(textoRespostaUsuario, atividade);
                         }
                     });
             });
@@ -45,6 +49,20 @@ document.addEventListener('DOMContentLoaded', function() {
     SPINNER.style.display = 'none';
     CONTEUDO.style.display = 'block';
 });
+
+const verificaAcertoTrad = function(opcao, atividade) {
+    const OPCAO = opcao.trim().toLowerCase();
+    const RESPOSTA = atividade.resposta.trim().toLowerCase();
+
+    if (OPCAO === RESPOSTA) {
+        getIdUsuario()
+            .then(function(userId) {
+                const MODULO = window.location.search.replace('?', '');
+
+                setProximaAtividade(userId, MODULO);
+            });
+    }
+}
 
 const verificaAcertoTradParc = function(opcao, atividade) {
     const BUTTON = document.createElement('button');

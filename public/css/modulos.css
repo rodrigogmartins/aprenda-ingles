@@ -16,9 +16,7 @@ body {
     max-height: 70vh;
     overflow-y: scroll;
 	flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
+    display: flex;justify-content: center;
 }
 
 .modulos::-webkit-scrollbar {
@@ -37,7 +35,7 @@ body {
 .modulo {
     font-size: 20px;
     padding: 15px;
-    margin: .2em;
+    margin: .1em;
     display: block;
 }
 

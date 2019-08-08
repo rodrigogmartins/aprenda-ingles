@@ -1,12 +1,8 @@
 import {AUTH} from '../firebase.js';
-import {setProximaAtividade} from './atividade.crud.js';
 import {feedback} from '../alert.js';
 
 export const cadastro = function(email, senha) {
     AUTH.createUserWithEmailAndPassword(email, senha)
-        .then(function() {
-            setProximaAtividade(AUTH.currentUser.uid);
-        })
         .then(redirect)
         .catch(function() {
             feedback('#cadastro-alert');
@@ -14,7 +10,7 @@ export const cadastro = function(email, senha) {
 };
 
 const redirect = function() {
-    window.location.replace('atividade.html');
+    window.location.replace('modulos.html');
 };
 
 export const deletar = function() {

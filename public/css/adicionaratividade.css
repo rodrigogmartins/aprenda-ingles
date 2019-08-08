@@ -32,3 +32,10 @@ table {
     justify-content: center;
     flex-direction: column;
 }
+
+#label-switch {
+    color: white;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    font-size: 1.2em;
+}

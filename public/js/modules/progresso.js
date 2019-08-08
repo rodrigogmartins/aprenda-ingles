@@ -1,5 +1,6 @@
 import {buscarTodasAtividades,
-    getProgressoModuloUsuario} from './crud/atividade.crud.js';
+    getProgressoModuloUsuario,
+    setAtividadeInicial} from './crud/atividade.crud.js';
 import {getIdUsuario} from './firebase-auth.js';
 
 export const mostraBarraDeProgresso = function() {
@@ -12,6 +13,8 @@ export const mostraBarraDeProgresso = function() {
 
                     if (progresso) {
                         INDICE_ATV_ATUAL = progresso.split(';').reverse()[1];
+                    } else {
+                        setAtividadeInicial(userId, MODULO);
                     }
 
                     buscarTodasAtividades(MODULO)

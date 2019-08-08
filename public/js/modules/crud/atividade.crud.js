@@ -1,13 +1,19 @@
 import {DATABASE} from '../firebase.js';
 import {feedback} from '../alert.js';
 
+export const setAtividadeInicial = function(userId, modulo) {
+    const OBJETO = JSON.parse(`{"${modulo}": "0;" }`);
+
+    DATABASE.ref(`/users/${userId}/progresso`)
+        .update(OBJETO);
+};
+
 export const setProximaAtividade = function(userId, modulo) {
     const mdl = modulo;
     getProgressoUsuario(userId)
         .then(function(progresso) {
             const MAP = new Map(Object.entries(progresso));
             const PROGRESSO_ANTIGO = MAP.get(mdl);
-            const TODAS_ATIVIDADES = JSON.parse(localStorage.getItem('todasAtividades'));
             let novoProgresso = '0;';
 
             if (PROGRESSO_ANTIGO !== undefined) {
@@ -38,13 +44,15 @@ const reload = function(progresso) {
 
 const getIndiceProximaAtividade = function(progresso) {
     const TODAS_ATIVIDADES = JSON.parse(localStorage.getItem('todasAtividades'));
-    const TOTAL_ATIVIDADES = Object.keys(TODAS_ATIVIDADES).length - 3;
+    let TOTAL_ATIVIDADES = Object.keys(TODAS_ATIVIDADES);
+    TOTAL_ATIVIDADES = TOTAL_ATIVIDADES.length - 3;
     const indicesProgresso = progresso.split(';');
     let ultimaAtividade = indicesProgresso[indicesProgresso.length-2];
     ultimaAtividade = parseInt(ultimaAtividade);
+    ultimaAtividade++;
 
-    if (TOTAL_ATIVIDADES === ultimaAtividade) {
-        return (ultimaAtividade + 1) + '';
+    if (TOTAL_ATIVIDADES > ultimaAtividade) {
+        return (ultimaAtividade) + '';
     } else {
         return '0';
     }

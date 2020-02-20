@@ -12,15 +12,12 @@
   >Há uma frase, podendo ser em inglês ou em português, e um campo de texto para o usuário escrever a frase traduzida sem ajuda.
 
 ## O Projeto
------------
   O projeto teve inicio no ultimo bimestre como avaliação de conclusão da disciplina de DBO (Desenvolvimento Baseado em Objetos) no ano de 2018 do curso Técnico em Informática para a Internet do [IFRS Campus Rio Grande](https://ifrs.edu.br/riogrande/). Como eu e alguns professores gostamos da ideia, resolvemos dar segmento ao desenvolvimento em um período de estágio durante o ano de 2019.
 
   A ideia é de que o sistema possa ser alimentado pelos próprios usuários, criando módulos, atividades, corrigindo alguns desafios que eventualmente tenham identificado erros, porém há também a possibilidade de criar módulos privados, onde só o criador por efetuar alterações.
 
 
 # Autor
-
-## Rodrigo Martins
-###  [LinkedIn](https://www.linkedin.com/in/rodrigo-martins-496094169/)
+###  [Rodrigo Martins](https://www.linkedin.com/in/rodrigo-martins-496094169/)
 ###  rodrigo.martins7121@gmail.com
 

@@ -1,6 +1,6 @@
 # Aprenda Inglês
   
-  O usuário possui alguns desafios dividos por tópicos macros como ***Comida*** ou ***Emoções**. Atualmente existem três tipos de desafios para o usuário sendo eles: de video, relacionar palavras e tradução completa.
+  O usuário possui alguns desafios dividos por tópicos macros como ***Comida*** ou ***Emoções***. Atualmente existem três tipos de desafios para o usuário sendo eles: de video, relacionar palavras e tradução completa.
 
   ### Desafios de vídeo 
   >Consistem em trechos de vídeos em inglês, alguma pergunta e uma sére de alternativas de resposta, o usuário terá que assistir o trecho e interpretar para tentar responder o desejado.
